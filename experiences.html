@@ -105,8 +105,14 @@
       const rows = cat === 'all' ? list : list.filter(v => v.category === cat);
       document.getElementById('grid').innerHTML = rows.map(cardHTML).join('') ||
         '<p class="muted">Nothing in this category yet — check back soon.</p>';
-      const label = { all: 'experiences', Tour: 'tours', Food: 'food experiences', Transport: 'rides' }[cat] || 'experiences';
-      document.getElementById('count').textContent = rows.length + ' ' + label + ', all verified';
+      const labels = {
+        all: ['experience', 'experiences'],
+        Tour: ['tour', 'tours'],
+        Food: ['food experience', 'food experiences'],
+        Transport: ['ride', 'rides']
+      }[cat] || ['experience', 'experiences'];
+      const noun = rows.length === 1 ? labels[0] : labels[1];
+      document.getElementById('count').textContent = rows.length + ' ' + noun + ' · every host verified in person';
       document.querySelectorAll('#filters .filter-chip').forEach(b =>
         b.classList.toggle('is-active', b.dataset.cat === cat));
     }
