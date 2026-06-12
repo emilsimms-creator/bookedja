@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — My bookings (operator)</title>
+  <meta name="description" content="Operator home for BookedJA hosts — see who's coming, check guests in, and watch your money. Works offline." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body class="op-body">
+  <a class="skip-link" href="#root">Skip to main content</a>
+
+  <header class="op-header">
+    <div class="container op-header__in">
+      <a href="./index.html" class="brand-lockup" style="min-width:0">
+        <img src="./assets/images/bookedja-mark-light.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-light.png" alt="BookedJA" class="brand-lockup__wordmark" />
+        <span class="op-tag">Operator</span>
+      </a>
+      <select id="vendorSwitcher" aria-label="Switch operator account (demo)" class="op-switcher"></select>
+    </div>
+  </header>
+
+  <main id="root" tabindex="-1" class="container container--mid section--tight">
+    <p class="muted center" style="padding:4rem 0">Loading…</p>
+  </main>
+
+  <!-- Bottom tab nav (mobile) -->
+  <nav class="bottomnav" aria-label="Operator">
+    <a href="./vendor-dashboard.html" class="is-active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5"/></svg>
+      Today
+    </a>
+    <a href="./vendor-scan.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V4h3M17 4h3v3M21 17v3h-3M7 20H4v-3M7 12h10"/></svg>
+      Check in
+    </a>
+    <a href="#money">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="3"/></svg>
+      My money
+    </a>
+    <a href="#help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5.1.7c0 1.7-2.6 2.3-2.6 3.5M12 17h.01"/></svg>
+      Help
+    </a>
+  </nav>
+
+<script>
+  function greeting() {
+    const h = new Date().getHours();
+    return h < 12 ? 'Good morning' : (h < 17 ? 'Good afternoon' : 'Good evening');
+  }
+
+  function tierBadge(t) {
+    if (t === 'Top Local') return '<span class="badge badge--top">★ Top Local</span>';
+    if (t === 'New') return '<span class="badge badge--new">New on BookedJA</span>';
+    return '<span class="badge badge--verified">✓ Verified</span>';
+  }
+
+  function waGuestBtn(v, b, small) {
+    const msg = 'Hi ' + firstName(cleanText(b.visitorName)) + ', this is ' + firstName(cleanText(decodeHTML(v.name)))
+      + ' from BookedJA about your booking ' + b.id + ' on ' + fmtDate(b.date) + ' at ' + b.time + '. ';
+    return `<a href="${waLink(b.visitorPhone, msg)}" target="_blank" rel="noopener" class="btn btn--wa${small ? ' btn--small' : ''}">${waIcon()} WhatsApp ${safeText(firstName(b.visitorName))}</a>`;
+  }
+
+  function actionBtns(v, b) {
+    const isT = v.category === 'Transport';
+    if (b.status === 'confirmed') {
+      if (isT && b.rideStatus !== 'arrived') {
+        return b.rideStatus === 'enroute'
+          ? `<button type="button" data-action="arrived" data-id="${b.id}" class="btn btn--primary">I've reached the pickup</button>`
+          : `<button type="button" data-action="enroute" data-id="${b.id}" class="btn btn--dark">I'm on my way</button>`;
+      }
+      return `<button type="button" data-action="start" data-id="${b.id}" class="btn btn--primary">${isT ? 'Passenger on board' : 'Check in'}</button>`;
+    }
+    if (b.status === 'in_progress') {
+      return `<button type="button" data-action="complete" data-id="${b.id}" class="btn btn--gold">All done — collect ${fmtJMD(bookingPayoutJMD(b))}</button>`;
+    }
+    return '';
+  }
+
+  function todayCard(v, b) {
+    return `
+      <div class="big-card big-card--next">
+        <div class="flex items-start justify-between gap-3 flex-wrap">
+          <div>
+            <p class="big-time">${safeText(b.time)}</p>
+            <p class="big-name mt-1">${safeText(b.visitorName)}</p>
+            <p class="muted">${b.guests} ${b.guests > 1 ? 'people' : 'person'} · paid already · ref ${safeText(b.id)}</p>
+            ${b.rideStatus && b.rideStatus !== 'scheduled' ? `<p class="bold mt-1" style="color:var(--green-deep)">${b.rideStatus === 'enroute' ? 'You\'re on the way' : 'You\'ve arrived at pickup'}</p>` : ''}
+            ${b.visitorNote ? `<p class="small muted mt-2"><strong>They said:</strong> ${safeText(b.visitorNote)}</p>` : ''}
+          </div>
+          <span class="badge badge--ok">Paid ✓</span>
+        </div>
+        <div class="brow__actions">
+          ${actionBtns(v, b)}
+          ${waGuestBtn(v, b)}
+        </div>
+      </div>`;
+  }
+
+  function upcomingRow(v, b) {
+    return `
+      <div class="brow">
+        <div class="brow__top">
+          <div>
+            <p class="brow__when">${fmtDate(b.date)} · ${safeText(b.time)}</p>
+            <p class="bold mt-1" style="font-size:1.1rem">${safeText(b.visitorName)} · ${b.guests} ${b.guests > 1 ? 'people' : 'person'}</p>
+            ${b.visitorNote ? `<p class="small muted mt-1"><strong>They said:</strong> ${safeText(b.visitorNote)}</p>` : ''}
+          </div>
+          <div class="center" style="text-align:right">
+            <span class="badge badge--ok">Paid ✓</span>
+            <p class="small muted mt-1">You collect <strong>${fmtJMD(bookingPayoutJMD(b))}</strong></p>
+          </div>
+        </div>
+        <div class="brow__actions">
+          ${actionBtns(v, b)}
+          ${waGuestBtn(v, b, true)}
+        </div>
+      </div>`;
+  }
+
+  function render(v) {
+    const name = safeText(v.name);
+    const first = safeText(firstName(decodeHTML(v.name)));
+    const all = bookingsForVendor(v.id);
+    const today = new Date().toISOString().slice(0, 10);
+    const thisMonth = today.slice(0, 7);
+
+    const upcoming = all.filter(b => b.status === 'confirmed' || b.status === 'in_progress')
+      .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+    const todays = upcoming.filter(b => b.date === today);
+    const later = upcoming.filter(b => b.date !== today);
+    const done = all.filter(b => b.status === 'completed')
+      .sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time));
+
+    const earnedMonth = all.filter(b => b.date.slice(0, 7) === thisMonth && b.status !== 'cancelled')
+      .reduce((s, b) => s + bookingPayoutJMD(b), 0);
+
+    const paused = !!STORE.get('paused:' + v.id);
+
+    // draft / verification banner for self-registered hosts
+    let banner = '';
+    if (v.custom) {
+      const rs = v.reviewStatus || 'pending';
+      if (rs === 'verified') {
+        banner = `<div class="notice notice--ok mb-3"><p class="bold">✓ You're verified — guests can book you now.</p><p class="small muted mt-1">Bookings land right here and on your WhatsApp.</p></div>`;
+      } else if (rs === 'flagged') {
+        banner = `<div class="notice notice--bad mb-3"><p class="bold">We need one more thing from you.</p><p class="small muted mt-1">Our team will message you on WhatsApp to sort it out — nothing to do here.</p></div>`;
+      } else {
+        banner = `<div class="notice notice--warn mb-3"><p class="bold">${getQuery('welcome') ? 'You\'re in! ' : ''}We're checking your details now.</p><p class="small muted mt-1">Your listing is saved. It goes live to guests as soon as you're verified — we'll tell you on WhatsApp.</p></div>`;
+      }
+    }
+
+    const tierGoal = v.tier === 'Top Local' ? null
+      : v.tier === 'Verified' ? { name: 'Top Local', need: 25 }
+      : { name: 'Verified', need: 5 };
+
+    document.getElementById('root').innerHTML = `
+      ${banner}
+
+      <p class="kicker">${greeting()}, ${first} 👋</p>
+      <h1 class="op-hello mt-1">${todays.length > 0 ? (todays.length + ' guest' + (todays.length > 1 ? 's' : '') + ' today.') : 'No guests today.'}</h1>
+      <p class="op-sub mt-1">${todays.length > 0 ? 'Everything below is paid for already — just welcome them.' : (later.length ? 'Next booking: ' + fmtDate(later[0].date) + ' at ' + safeText(later[0].time) + '.' : 'When a guest books you, it shows up right here.')}</p>
+
+      ${todays.length ? `<div class="stack mt-4">${todays.map(b => todayCard(v, b)).join('')}</div>` : ''}
+
+      ${later.length ? `
+        <h2 class="mt-6" style="font-size:1.4rem">Coming up</h2>
+        <div class="mt-3">${later.map(b => upcomingRow(v, b)).join('')}</div>` : ''}
+
+      <!-- MONEY -->
+      <section id="money" class="mt-6">
+        <h2 style="font-size:1.4rem">Your money</h2>
+        <div class="big-card mt-3">
+          <p class="muted">Made this month with BookedJA</p>
+          <p class="money-figure mt-1">${fmtJMD(earnedMonth)}</p>
+          <p class="small muted mt-1">Paid to your bank or wallet after each booking is done.</p>
+          <div class="mt-4">
+            <div class="flex justify-between small bold"><span>From every booking, you keep ${Math.round((1 - PLATFORM_FEE) * 100)}%</span><span class="muted">BookedJA keeps ${PLATFORM_FEE_LABEL}</span></div>
+            <div class="split-bar mt-2" role="img" aria-label="You keep ${Math.round((1 - PLATFORM_FEE) * 100)} percent of every booking">
+              <div class="you" style="width:${(1 - PLATFORM_FEE) * 100}%"></div>
+              <div class="fee" style="width:${PLATFORM_FEE * 100}%"></div>
+            </div>
+            <p class="small muted mt-2">Example: ${fmtUSD(v.pricePerPersonUSD)} × 2 guests = you collect <strong>${fmtJMD(v.pricePerPersonUSD * 2 * USD_TO_JMD * OPERATOR_SHARE)}</strong>.</p>
+          </div>
+        </div>
+        ${done.length ? `
+        <div class="card card--flat mt-3">
+          <p class="bold">Finished bookings</p>
+          ${done.slice(0, 5).map(b => `
+            <div class="summary-row" style="border-top:1px solid var(--line-soft);margin-top:.5rem;padding-top:.6rem">
+              <span class="muted">${fmtDate(b.date)} · ${safeText(b.visitorName)} · ${b.guests}p</span>
+              <strong style="color:var(--green-deep)">+ ${fmtJMD(bookingPayoutJMD(b))}</strong>
+            </div>`).join('')}
+        </div>` : ''}
+      </section>
+
+      <!-- STATUS + BADGE -->
+      <section class="grid grid--2 mt-5">
+        <div class="card">
+          <p class="bold" style="font-size:1.1rem">Taking bookings?</p>
+          <p class="small muted mt-1">Turn this off before a trip or sick day — guests can't book you while it's off.</p>
+          <button type="button" id="pauseToggle" class="switch mt-3" role="switch" aria-checked="${!paused}">
+            <span class="track" aria-hidden="true"></span>
+            <span id="pauseLabel">${paused ? "OFF — guests can't book you" : 'ON — guests can book you'}</span>
+          </button>
+        </div>
+        <div class="card">
+          <p class="bold" style="font-size:1.1rem">Your badge: ${tierBadge(v.tier)}</p>
+          ${tierGoal ? `
+            <p class="small muted mt-2">${Math.max(0, tierGoal.need - v.trips)} more trips to reach <strong>${tierGoal.name}</strong>. Guests pick ${tierGoal.name} hosts first.</p>
+            <div class="progress mt-2"><div style="width:${Math.min(100, (v.trips / tierGoal.need) * 100)}%"></div></div>`
+          : '<p class="small muted mt-2">The highest badge there is. Big up yuhself!</p>'}
+          <p class="small muted mt-3">${v.rating > 0 ? '★ ' + v.rating.toFixed(1) + ' rating · ' + v.trips + ' trips' : 'Your first review comes after your first booking.'}</p>
+        </div>
+      </section>
+
+      <!-- HELP -->
+      <section id="help" class="card card--tint mt-5 center">
+        <p class="bold" style="font-size:1.2rem">Need a hand with anything?</p>
+        <p class="muted mt-1">The BookedJA team answers on WhatsApp, every day.</p>
+        <a href="${waLink(PLATFORM_WHATSAPP, 'Hi BookedJA, this is ' + cleanText(decodeHTML(v.name)) + '. I need help with: ')}" target="_blank" rel="noopener" class="btn btn--wa btn--big mt-3">${waIcon()} WhatsApp BookedJA</a>
+      </section>
+    `;
+
+    // pause toggle — persisted per operator on this device
+    document.getElementById('pauseToggle').addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      const nowPaused = btn.getAttribute('aria-checked') === 'true'; // was ON → pause it
+      STORE.set('paused:' + v.id, nowPaused);
+      btn.setAttribute('aria-checked', nowPaused ? 'false' : 'true');
+      document.getElementById('pauseLabel').textContent = nowPaused ? "OFF — guests can't book you" : 'ON — guests can book you';
+      showToast(nowPaused ? 'Bookings paused. Turn back on when you\'re ready.' : 'You\'re open for bookings ✓');
+    });
+
+    // booking actions — update + re-render (no page reload; kinder to weak signal)
+    document.querySelectorAll('[data-action]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        if (action === 'start') { updateBooking(id, { status: 'in_progress' }); showToast('Guest checked in ✓'); }
+        else if (action === 'complete') {
+          const b = getBooking(id);
+          updateBooking(id, { status: 'completed' });
+          showToast('Done! ' + fmtJMD(bookingPayoutJMD(b)) + ' on the way to you 🎉');
+        }
+        else if (action === 'enroute') { updateBooking(id, { rideStatus: 'enroute', etaAt: Date.now() + 12 * 60000 }); showToast('Guest can see you\'re on the way'); }
+        else if (action === 'arrived') { updateBooking(id, { rideStatus: 'arrived' }); showToast('Guest knows you\'ve arrived ✓'); }
+        render(getVendor(v.id));
+      });
+    });
+  }
+
+  function populateSwitcher(currentId) {
+    const sel = document.getElementById('vendorSwitcher');
+    sel.innerHTML = getAllVendors().map(x =>
+      `<option value="${x.id}" ${x.id === currentId ? 'selected' : ''}>${safeText(x.name)} · ${safeText(x.category)}${x.custom ? ' (new)' : ''}</option>`
+    ).join('');
+    sel.addEventListener('change', () => { setCurrentVendorId(sel.value); render(getVendor(sel.value)); });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const id = getCurrentVendorId();
+    const v = getVendor(id);
+    populateSwitcher(id);
+    if (!v) {
+      document.getElementById('root').innerHTML = '<p class="center muted" style="padding:4rem 0">Account not found.</p>';
+      return;
+    }
+    render(v);
+  });
+</script>
+</body>
+</html>

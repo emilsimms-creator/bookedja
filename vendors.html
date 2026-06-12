@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — For operators: get bookings on WhatsApp</title>
+  <meta name="description" content="Run tours, cook food or drive on Jamaica's South Coast? Get bookings straight to your WhatsApp and money to your bank. Free to join." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__in">
+      <a href="./index.html" class="brand-lockup" aria-label="BookedJA home">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="site-nav" id="siteNav" aria-label="Main">
+        <a href="./experiences.html">Things to do</a>
+        <a href="./my-bookings.html">My bookings</a>
+        <a href="./vendors.html" aria-current="page">For operators</a>
+        <a href="./about.html">About</a>
+      </nav>
+      <a href="./vendor-dashboard.html" class="btn btn--ghost btn--small header-cta">Operator login</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- HERO -->
+    <section class="section" style="background:var(--green-deep); color:#fff">
+      <div class="container">
+        <div style="max-width:40rem">
+          <span class="kicker" style="color:var(--gold)">For South Coast operators · Free to join</span>
+          <h1 class="mt-2" style="color:#fff">Bookings on your WhatsApp.<br />Money in your bank.</h1>
+          <p class="lead mt-3" style="color:rgba(255,255,255,.88)">You don't need a website. You don't need to learn an app. If you can use WhatsApp, you can earn with BookedJA.</p>
+          <div class="flex flex-wrap gap-3 mt-4">
+            <a id="joinWa" href="#" target="_blank" rel="noopener" class="btn btn--wa btn--big">Join on WhatsApp — one message</a>
+            <a href="./become-a-host.html" class="btn btn--light">Sign up here instead</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 STEPS -->
+    <section class="section">
+      <div class="container">
+        <span class="kicker">How it works for you</span>
+        <h2 class="mt-2">Three steps. That's it.</h2>
+        <div class="grid grid--3 mt-5">
+          <div class="step">
+            <span class="step__num">1</span>
+            <div>
+              <h3>Send us one message</h3>
+              <p>Tell us your name, your town, and what you do. We come to <em>you</em> for the rest.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">2</span>
+            <div>
+              <h3>We check you out — free</h3>
+              <p>ID, licence, insurance. It's what makes visitors trust you enough to pay up front. No papers yet? A trusted Top Local can vouch for you to start.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">3</span>
+            <div>
+              <h3>Guests book. You get paid.</h3>
+              <p>Every booking comes to your WhatsApp, already paid. Finish the trip, and the money goes to your bank or wallet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MONEY EXAMPLE -->
+    <section class="section section--tight" style="background:var(--green-tint)">
+      <div class="container">
+        <div class="grid grid--2 items-center">
+          <div>
+            <span class="kicker">Straight talk about money</span>
+            <h2 class="mt-2">You keep 82% of every booking.</h2>
+            <p class="lead mt-2">No sign-up fee. No monthly fee. BookedJA only earns when you earn — 18% per booking, and that covers the visitors' payment protection, your verification, and the marketing that brings them to you.</p>
+          </div>
+          <div class="card">
+            <p class="bold">Example: a boat tour at US$45 a head</p>
+            <div class="summary-row mt-2"><span class="muted">2 guests pay</span><strong id="exTotal"></strong></div>
+            <div class="summary-row"><span class="muted">BookedJA fee (18%)</span><span class="muted" id="exFee"></span></div>
+            <div class="summary-total"><span class="bold">You collect</span><span class="amt" style="color:var(--green-deep)" id="exYou"></span></div>
+            <div class="split-bar mt-3" role="img" aria-label="You keep 82 percent">
+              <div class="you" style="width:82%"></div>
+              <div class="fee" style="width:18%"></div>
+            </div>
+            <p class="small muted mt-2">Paid after the trip is done — usually same week.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY VERIFICATION -->
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--2 items-center">
+          <div>
+            <span class="kicker">Why visitors pay up front</span>
+            <h2 class="mt-2">Your badge does the convincing.</h2>
+            <p class="lead mt-2">Foreign visitors are nervous about booking with someone they don't know. Your verified badge — backed by real checks — is what turns "maybe" into a paid booking before they even land in Jamaica.</p>
+          </div>
+          <ul class="trust-list card card--flat">
+            <li><span class="tick">✓</span> <strong>Verified</strong> — ID, licence and insurance checked</li>
+            <li><span class="tick" style="background:var(--gold);color:var(--ink)">★</span> <strong>Top Local</strong> — earned with 25+ great trips</li>
+            <li><span class="tick">✓</span> Fixed prices mean no haggling on arrival</li>
+            <li><span class="tick">✓</span> Guests pay before they come — no no-shows wasting your day</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--tight">
+      <div class="container container--mid">
+        <h2>Questions people ask us</h2>
+        <div class="mt-4">
+          <details class="faq">
+            <summary>Do I need a smartphone?</summary>
+            <p class="faq__body">If your phone runs WhatsApp, you're set. The whole thing is built to work on any phone, even with weak signal — your booking list works offline.</p>
+          </details>
+          <details class="faq">
+            <summary>What if my internet goes off?</summary>
+            <p class="faq__body">Nothing breaks. Your bookings are saved on your phone, you can still check guests in, and everything catches up when signal comes back.</p>
+          </details>
+          <details class="faq">
+            <summary>How do I get paid?</summary>
+            <p class="faq__body">In Jamaican dollars, to your bank account or mobile wallet, after each booking is completed. No chasing anybody for money.</p>
+          </details>
+          <details class="faq">
+            <summary>I don't have all my business papers yet.</summary>
+            <p class="faq__body">Start anyway. A trusted Top Local operator can vouch for you while we help you get your licensing sorted — and you can take bookings as soon as you're verified.</p>
+          </details>
+          <details class="faq">
+            <summary>What does it cost?</summary>
+            <p class="faq__body">Nothing to join, nothing monthly. BookedJA keeps 18% of each booking — we only make money when you do.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="card center" style="background:var(--green-deep); color:#fff; border:none; padding:clamp(2rem,6vw,3.5rem)">
+          <h2 style="color:#fff">Ready? Send the message.</h2>
+          <p class="mt-2" style="color:rgba(255,255,255,.85); font-size:1.1rem">It takes one minute. We reply the same day.</p>
+          <div class="flex flex-wrap gap-3 mt-4" style="justify-content:center">
+            <a id="joinWa2" href="#" target="_blank" rel="noopener" class="btn btn--wa btn--big">Join on WhatsApp</a>
+            <a href="./become-a-host.html" class="btn btn--light">Sign up with a form</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA · Made in St. Elizabeth, Jamaica</span>
+        <span>Prototype — no real payments are processed</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const msg = 'Hi BookedJA! I want to join.\nMy name: \nMy town: \nWhat I do (tours / food / driving / stay): ';
+    document.getElementById('joinWa').href = waLink(PLATFORM_WHATSAPP, msg);
+    document.getElementById('joinWa2').href = waLink(PLATFORM_WHATSAPP, msg);
+
+    // money example, computed from the live fee constant so it never drifts
+    const total = 45 * 2 * USD_TO_JMD;
+    document.getElementById('exTotal').textContent = fmtJMD(total) + ' (US$90)';
+    document.getElementById('exFee').textContent = '− ' + fmtJMD(total * PLATFORM_FEE);
+    document.getElementById('exYou').textContent = fmtJMD(total * OPERATOR_SHARE);
+  });
+</script>
+</body>
+</html>

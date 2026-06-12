@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — For Visitors</title>
+  <meta name="description" content="Authentic Jamaica, without the guesswork. Verified guides, fixed prices, and a digital pass that turns up-front trust into a relaxed holiday." />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <script src="./assets/tailwind.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['Fraunces','ui-serif','Georgia','serif'], sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+      colors: { ink:'#0A1F2E', paper:'#FAF7F2', ocean:'#0F4C5C','ocean-2':'#2C7DA0', coral:'#E76F51', gold:'#E9B824', leaf:'#2A9D8F', sand:'#E9DCC9', stone:'#5B6770' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-paper/85 border-b border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="./index.html" class="brand-lockup">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/80">
+        <a href="./experiences.html" class="hover:text-ocean">Experiences</a>
+        <a href="./visitors.html" class="text-ocean font-semibold">For Visitors</a>
+        <a href="./vendors.html" class="hover:text-ocean">For Vendors</a>
+        <a href="./ministry.html" class="hover:text-ocean">For Ministry</a>
+      </nav>
+      <a href="./experiences.html" class="inline-flex items-center rounded-full bg-ink text-paper px-4 py-2 text-sm font-medium hover:bg-ocean transition">Explore South Coast</a>
+    </div>
+  </header>
+
+  
+  <main id="main" tabindex="-1">
+<!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10" style="background:
+      radial-gradient(1000px 600px at 80% 0%, rgba(231,111,81,.22), transparent 60%),
+      radial-gradient(800px 600px at 0% 30%, rgba(42,157,143,.18), transparent 60%),
+      linear-gradient(180deg,#FAF7F2,#F2EEE5)"></div>
+    <div class="max-w-7xl mx-auto px-6 pt-20 pb-16 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7">
+        <span class="chip"><span class="w-1.5 h-1.5 rounded-full bg-coral"></span> For Visitors</span>
+        <h1 class="mt-5 font-display text-5xl sm:text-6xl font-semibold leading-[1.05] tracking-tight">
+          Authentic Jamaica.<br/>
+          <span class="italic text-ocean">Without the guesswork.</span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-ink/75 leading-relaxed max-w-2xl">
+          Step outside the resort with confidence. Every BookedJA experience is led
+          by a verified Jamaican local, priced up-front, and confirmed with a digital
+          pass on your phone — so you arrive knowing exactly who you'll meet, what
+          you'll do, and what you'll pay.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="./experiences.html" class="inline-flex items-center gap-2 rounded-full bg-ocean text-paper px-6 py-3 text-sm font-semibold hover:bg-ink transition">Browse experiences</a>
+          <a href="#how" class="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold hover:bg-ink hover:text-paper transition">How it works</a>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="relative">
+          <div class="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-coral/20 via-gold/15 to-leaf/20 blur-2xl"></div>
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-ink/5 aspect-[4/5] bg-cover bg-center" style="background-image:url('./assets/images/treasure-beach.jpg')">
+            <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(10,31,46,.05) 0%, rgba(10,31,46,.15) 60%, rgba(10,31,46,.75) 100%)"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-paper">
+              <span class="inline-flex items-center gap-1 rounded-full bg-paper/15 backdrop-blur text-paper text-[10px] font-semibold px-2 py-1">Treasure Beach · St. Elizabeth</span>
+              <p class="mt-3 font-display text-2xl font-semibold leading-tight">Step out. Stay relaxed.</p>
+            </div>
+          </div>
+          <div class="absolute -left-6 bottom-12 rotate-[-5deg] rounded-2xl bg-paper shadow-xl ring-1 ring-ink/5 px-4 py-3 hidden sm:block">
+            <p class="text-[10px] uppercase tracking-widest text-stone">Booking confirmed</p>
+            <p class="font-display text-sm font-semibold">Show your pass on arrival</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY BOOKEDJA -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <div class="w-12 h-12 rounded-2xl bg-leaf/15 flex items-center justify-center text-leaf">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3 class="mt-5 font-display text-2xl font-semibold">Real, verified locals</h3>
+        <p class="mt-3 text-ink/70 leading-relaxed">Identity-checked, JTB-licensed where required, background-checked, and rated by every visitor who came before you.</p>
+      </div>
+      <div class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <div class="w-12 h-12 rounded-2xl bg-coral/15 flex items-center justify-center text-coral">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
+        </div>
+        <h3 class="mt-5 font-display text-2xl font-semibold">Fixed prices, paid up-front</h3>
+        <p class="mt-3 text-ink/70 leading-relaxed">No haggling, no surprises. Pay once in your home currency; funds are held in escrow until your experience is complete.</p>
+      </div>
+      <div class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <div class="w-12 h-12 rounded-2xl bg-ocean/15 flex items-center justify-center text-ocean">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v10H3z"/><path d="M7 12h.01M11 12h.01M15 12h.01"/></svg>
+        </div>
+        <h3 class="mt-5 font-display text-2xl font-semibold">Your digital "Booked" pass</h3>
+        <p class="mt-3 text-ink/70 leading-relaxed">Show your QR pass on arrival. Your guide scans it, confirms identity and pricing, and the experience begins — that simple.</p>
+      </div>
+      <div class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <div class="w-12 h-12 rounded-2xl bg-gold/20 flex items-center justify-center text-ink">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3 class="mt-5 font-display text-2xl font-semibold">The calm side of Jamaica</h3>
+        <p class="mt-3 text-ink/70 leading-relaxed">St. Elizabeth is Jamaica's 2nd-safest parish (major crimes -29% in 2024). Every host is insured. Our 24/7 support team is a WhatsApp message away.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PASS FEATURE -->
+  <section class="bg-ink text-paper relative overflow-hidden">
+    <div class="absolute -right-32 -top-32 w-[400px] h-[400px] rounded-full" style="background:radial-gradient(closest-side, rgba(233,184,36,.25), transparent)"></div>
+    <div class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-6">
+        <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">The "Already Booked" Pass</p>
+        <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">
+          A trust signal you carry in your pocket.
+        </h2>
+        <p class="mt-5 text-paper/75 text-lg leading-relaxed">
+          The pass is more than a ticket. It's how your guide, driver or host knows
+          you're with BookedJA — paid, verified, expected. No need to negotiate, no
+          need to wonder if you're with the right person. Open the app, show the pass,
+          enjoy your day.
+        </p>
+        <ul class="mt-7 space-y-3 text-paper/85">
+          <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-gold"></span> Includes operator photo, contact and license details</li>
+          <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-gold"></span> Works offline once issued — no data needed on arrival</li>
+          <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-gold"></span> Direct line to BookedJA 24/7 support over WhatsApp</li>
+          <li class="flex gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-gold"></span> Auto-shares your itinerary with a chosen contact at home</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-6">
+        <div class="relative mx-auto max-w-sm">
+          <div class="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-coral/20 via-gold/20 to-leaf/20 blur-2xl"></div>
+          <div class="relative rounded-3xl bg-paper text-ink p-6 shadow-2xl">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-[10px] uppercase tracking-widest text-stone">Booking · CONFIRMED</p>
+                <p class="font-display text-2xl font-semibold">Mangrove Safari</p>
+              </div>
+              <span class="inline-flex items-center gap-1 rounded-full bg-leaf/15 text-leaf text-[10px] font-semibold px-2 py-1">Verified</span>
+            </div>
+            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-xl bg-sand/60 p-3">
+                <p class="text-[10px] uppercase tracking-widest text-stone">Date</p>
+                <p class="font-semibold">Thu · 12 Nov</p>
+              </div>
+              <div class="rounded-xl bg-sand/60 p-3">
+                <p class="text-[10px] uppercase tracking-widest text-stone">Time</p>
+                <p class="font-semibold">09:30</p>
+              </div>
+              <div class="rounded-xl bg-sand/60 p-3">
+                <p class="text-[10px] uppercase tracking-widest text-stone">Guests</p>
+                <p class="font-semibold">2 adults</p>
+              </div>
+              <div class="rounded-xl bg-sand/60 p-3">
+                <p class="text-[10px] uppercase tracking-widest text-stone">Paid</p>
+                <p class="font-semibold">US$90.00</p>
+              </div>
+            </div>
+            <div class="mt-5 flex items-center gap-3 border-t border-ink/10 pt-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-coral to-gold"></div>
+              <div>
+                <p class="text-sm font-semibold">Ras Delroy · Black River</p>
+                <p class="text-[11px] text-stone">JTB · TPDCo trained · Insured</p>
+              </div>
+            </div>
+            <div class="mt-5 grid grid-cols-3 gap-2 text-center">
+              <div class="rounded-xl bg-ink text-paper p-3">
+                <p class="text-[10px] uppercase tracking-widest text-paper/60">Pass</p>
+                <p class="font-display text-lg font-semibold">QR</p>
+              </div>
+              <button type="button" class="rounded-xl border border-ink/15 p-3 text-xs font-semibold">WhatsApp</button>
+              <button type="button" class="rounded-xl border border-ink/15 p-3 text-xs font-semibold">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="max-w-7xl mx-auto px-6 py-24">
+    <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">Visitor flow</p>
+    <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">From booking to bunkmates with the boatman.</h2>
+
+    <ol class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <li class="rounded-3xl border border-ink/10 p-6">
+        <p class="font-display text-5xl font-semibold text-ocean/30">01</p>
+        <h3 class="mt-3 font-display text-xl font-semibold">Plan from home</h3>
+        <p class="mt-2 text-sm text-ink/70 leading-relaxed">Browse by category, date or town. Filter by verification tier and budget.</p>
+      </li>
+      <li class="rounded-3xl border border-ink/10 p-6">
+        <p class="font-display text-5xl font-semibold text-ocean/30">02</p>
+        <h3 class="mt-3 font-display text-xl font-semibold">Book &amp; pay</h3>
+        <p class="mt-2 text-sm text-ink/70 leading-relaxed">Card or Apple Pay. Funds escrowed until experience completes.</p>
+      </li>
+      <li class="rounded-3xl border border-ink/10 p-6">
+        <p class="font-display text-5xl font-semibold text-ocean/30">03</p>
+        <h3 class="mt-3 font-display text-xl font-semibold">Get your pass</h3>
+        <p class="mt-2 text-sm text-ink/70 leading-relaxed">Pass arrives by email + WhatsApp. Works offline. Includes operator photo + license.</p>
+      </li>
+      <li class="rounded-3xl border border-ink/10 p-6">
+        <p class="font-display text-5xl font-semibold text-ocean/30">04</p>
+        <h3 class="mt-3 font-display text-xl font-semibold">Show &amp; enjoy</h3>
+        <p class="mt-2 text-sm text-ink/70 leading-relaxed">Show your QR pass, confirm pricing, experience the South Coast as a guest, not a target.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- WHAT YOU CAN BOOK -->
+  <section class="bg-sand/40 border-y border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <p class="text-xs uppercase tracking-[0.2em] text-leaf font-semibold">What you can book</p>
+      <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Three categories at launch.</h2>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-paper p-7 border border-ink/10">
+          <p class="text-xs uppercase tracking-widest text-stone">Community &amp; Cultural Tours</p>
+          <h3 class="mt-2 font-display text-2xl font-semibold">Stories told by the people who lived them.</h3>
+          <ul class="mt-4 text-sm text-ink/75 space-y-1.5">
+            <li>· Black River mangrove safaris</li>
+            <li>· Appleton rum &amp; heritage</li>
+            <li>· Maroon walks &amp; Maggotty hikes</li>
+            <li>· Treasure Beach village tours</li>
+            <li>· YS Falls + Bamboo Avenue</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-paper p-7 border border-ink/10">
+          <p class="text-xs uppercase tracking-widest text-stone">Food Experiences</p>
+          <h3 class="mt-2 font-display text-2xl font-semibold">Eat where the cooks shop.</h3>
+          <ul class="mt-4 text-sm text-ink/75 space-y-1.5">
+            <li>· Cook-with-a-local kitchen suppers</li>
+            <li>· Little Ochi-style seafood feasts</li>
+            <li>· Pelican Bar boat-and-eat trips</li>
+            <li>· Farm-to-table dinners with named local growers</li>
+            <li>· Sunset rum-pairing tastings</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-paper p-7 border border-ink/10">
+          <p class="text-xs uppercase tracking-widest text-stone">Verified Transport</p>
+          <h3 class="mt-2 font-display text-2xl font-semibold">Drivers you'd recommend to your mother.</h3>
+          <ul class="mt-4 text-sm text-ink/75 space-y-1.5">
+            <li>· MBJ &amp; KIN airport transfers</li>
+            <li>· Day-driver between South Coast attractions</li>
+            <li>· Hotel-to-experience hops</li>
+            <li>· Multi-day itinerary drivers</li>
+            <li>· All JUTA / contract-carriage licensed &amp; insured</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL STRIP -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">What pilot visitors say</p>
+    <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Trust, in their own words.</h2>
+    <p class="mt-3 text-xs text-stone italic">Sample quotes shown for design preview. Real reviews collected during the Treasure Beach pilot launching Nov 2026.</p>
+
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <figure class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <blockquote class="font-display text-xl leading-snug">"We finally saw the Jamaica everyone whispers about — and didn't spend the day second-guessing every quote."</blockquote>
+        <figcaption class="mt-5 text-sm text-stone">Hannah &amp; David · London</figcaption>
+      </figure>
+      <figure class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <blockquote class="font-display text-xl leading-snug">"Marcus picked us up exactly when the pass said. The price never moved. The conversation made the trip."</blockquote>
+        <figcaption class="mt-5 text-sm text-stone">The Petersen family · Hamburg</figcaption>
+      </figure>
+      <figure class="rounded-3xl border border-ink/10 p-7 bg-paper">
+        <blockquote class="font-display text-xl leading-snug">"Miss Cynthia cooked with us in her own kitchen. The okra was from her sister's farm. I will never forget that night."</blockquote>
+        <figcaption class="mt-5 text-sm text-stone">Aisha · Toronto</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-ink text-paper">
+    <div class="max-w-7xl mx-auto px-6 py-20 flex flex-wrap items-center justify-between gap-6">
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold leading-tight max-w-2xl">Ready to meet the South Coast on its own terms?</h2>
+      <a href="./experiences.html" class="inline-flex items-center gap-2 rounded-full bg-coral text-paper px-6 py-3 text-sm font-semibold hover:bg-paper hover:text-ink transition">Browse experiences</a>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-paper border-t border-ink/10">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-stone">
+      <div class="brand-lockup brand-lockup--sm">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </div>
+      <p>© 2026 BookedJA · Your South Coast. Booked direct. Verified.</p>
+      <nav class="flex items-center gap-5">
+        <a href="./index.html" class="hover:text-ocean">Home</a>
+        <a href="./experiences.html" class="hover:text-ocean">Experiences</a>
+        <a href="./my-bookings.html" class="hover:text-ocean">My bookings</a>
+        <a href="./vendor-dashboard.html" class="hover:text-ocean">Vendor demo</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

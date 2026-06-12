@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Ministry &amp; Partner Brief</title>
+  <meta name="description" content="The visitor-side counterpart to ALEX. A Local First-aligned digital marketplace that operationalizes Tourism 3.0 on Jamaica's South Coast." />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <script src="./assets/tailwind.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['Fraunces','ui-serif','Georgia','serif'], sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+      colors: { ink:'#0A1F2E', paper:'#FAF7F2', ocean:'#0F4C5C','ocean-2':'#2C7DA0', coral:'#E76F51', gold:'#E9B824', leaf:'#2A9D8F', sand:'#E9DCC9', stone:'#5B6770' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-paper/85 border-b border-ink/5 no-print">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="./index.html" class="brand-lockup">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/80">
+        <a href="./experiences.html" class="hover:text-ocean">Experiences</a>
+        <a href="./visitors.html" class="hover:text-ocean">For Visitors</a>
+        <a href="./vendors.html" class="hover:text-ocean">For Vendors</a>
+        <a href="./ministry.html" class="text-ocean font-semibold">For Ministry</a>
+        <a href="./jampro.html" class="hover:text-ocean">For JAMPRO</a>
+      </nav>
+      <a href="#contact" class="inline-flex items-center rounded-full bg-ink text-paper px-4 py-2 text-sm font-medium hover:bg-ocean transition">Request a briefing</a>
+    </div>
+  </header>
+
+  
+  <main id="main" tabindex="-1">
+<!-- COVER -->
+  <section class="relative">
+    <div class="absolute inset-0 -z-10 bg-cover bg-center" style="background-image:url('./assets/images/hero-coast.jpg')"></div>
+    <div class="absolute inset-0 -z-10" style="background:linear-gradient(135deg, rgba(10,31,46,.82) 0%, rgba(15,76,92,.78) 60%, rgba(44,125,160,.65) 100%)"></div>
+    <svg class="absolute inset-0 w-full h-full opacity-[0.08]" aria-hidden="true">
+      <defs>
+        <pattern id="g" width="28" height="28" patternUnits="userSpaceOnUse">
+          <circle cx="1.2" cy="1.2" r="1.2" fill="#FAF7F2"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+    </svg>
+    <div class="max-w-7xl mx-auto px-6 pt-24 pb-32 text-paper">
+      <div class="max-w-4xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-gold font-semibold">Ministry &amp; Partner Brief · v0.1</p>
+        <h1 class="mt-5 font-display text-5xl sm:text-7xl font-semibold leading-[1.02] tracking-tight">
+          Tourism 3.0,<br/>
+          <span class="italic text-gold">operationalized.</span>
+        </h1>
+        <p class="mt-7 text-lg sm:text-2xl text-paper/85 leading-snug max-w-3xl">
+          BookedJA is the visitor-side counterpart to ALEX — a digital marketplace
+          that channels visitor dollars directly to verified Jamaican small operators
+          across community tours, food experiences and trusted transport. Pilot launch planned for
+          <strong class="text-paper">Black River &amp; Treasure Beach.</strong>
+        </p>
+        <div class="mt-10 grid sm:grid-cols-4 gap-4 max-w-3xl text-paper">
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Region</p>
+            <p class="font-display text-xl font-semibold mt-1">South Coast</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Head office</p>
+            <p class="font-display text-xl font-semibold mt-1">Malvern</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Pilot launch</p>
+            <p class="font-display text-xl font-semibold mt-1">Planned (date TBC)</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Pilot cohort (target)</p>
+            <p class="font-display text-xl font-semibold mt-1">40 operators</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION + MISSION -->
+  <section class="bg-sand/40 border-b border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8">
+      <div class="rounded-3xl bg-paper border border-ink/10 p-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">Vision</p>
+        <p class="mt-4 font-display text-2xl sm:text-3xl font-semibold leading-snug">
+          A Jamaica where every visitor dollar lands in the community that earned it —
+          and where booking the real Jamaica feels as safe and easy as booking
+          <span class="italic text-ocean">anywhere in the world.</span>
+        </p>
+        <p class="mt-4 text-sm text-ink/70 leading-relaxed">
+          Nowhere is that more possible than the South Coast, home to the deepest cultural
+          roots in Jamaican tourism — Accompong's Maroon heritage, Appleton's 1749 estate,
+          the unbroken fishing villages of Treasure Beach. We start by making that depth reachable.
+        </p>
+      </div>
+      <div class="rounded-3xl bg-ink text-paper p-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Mission</p>
+        <p class="mt-4 font-display text-2xl sm:text-3xl font-semibold leading-snug">
+          To connect visitors directly with local operators we've verified in person —
+          with fixed prices, protected payments, and bookings that arrive on WhatsApp
+          and work without signal.
+        </p>
+        <p class="mt-4 text-sm text-paper/75 leading-relaxed">
+          Every booking goes <span class="italic text-gold">straight into local hands</span> —
+          its guides, its cooks, its drivers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">01 · Executive summary</p>
+      </div>
+      <div class="lg:col-span-8 space-y-5 text-lg text-ink/80 leading-relaxed">
+        <p>
+          The Local First policy and the Tourism 3.0 framework articulate a clear
+          mandate: <em>distribute the benefits of tourism more widely, more digitally,
+          more locally.</em> ALEX has demonstrated the supply-side proof — over
+          <strong>J$1.2B</strong> from hotels to Jamaican farmers through the
+          Agri-Linkages Exchange.
+        </p>
+        <p>
+          BookedJA is the symmetrical mechanism on the demand side. It connects
+          global visitors directly to verified Jamaican community guides, food hosts
+          and licensed transport operators — bypassing the all-inclusive intermediary
+          and routing visitor dollars to small Jamaican enterprises.
+        </p>
+        <p>
+          The MVP focuses on Jamaica's South Coast, in alignment with the Ministry's
+          publicly stated strategy to develop the region around
+          <strong>accessible, differentiated experiences</strong>. BookedJA is
+          headquartered in <strong>Malvern</strong> — in the Ministry-designated
+          Edutourism corridor — with our operations hub planned for
+          <strong>Black River</strong>, deliberately sited to work hand-in-hand
+          with the new TPDCo office there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALIGNMENT MATRIX -->
+  <section class="bg-sand/40 border-y border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-4">
+          <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">02 · Alignment</p>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">
+            How BookedJA threads through stated policy.
+          </h2>
+        </div>
+        <div class="lg:col-span-8">
+          <div class="overflow-hidden rounded-2xl border border-ink/10 bg-paper">
+            <table class="w-full text-sm">
+              <thead class="bg-ink text-paper">
+                <tr>
+                  <th class="text-left font-medium px-5 py-3 w-1/3">Policy / programme</th>
+                  <th class="text-left font-medium px-5 py-3">BookedJA delivery</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-ink/5 align-top">
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">Local First Policy</p>
+                    <p class="text-xs text-stone mt-1">OPM, 2025</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Prioritizes the exact categories named — transport operators, farmers, artisans, micro-entrepreneurs — as the supply of the marketplace.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">Tourism 3.0 — Local Ownership</p>
+                    <p class="text-xs text-stone mt-1">MOT</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Vendors own their listings, set their own prices, and are paid directly in J$ to their bank or mobile wallet. The platform never holds title to the experience.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">Tourism Linkages Network · ALEX</p>
+                    <p class="text-xs text-stone mt-1">MOT</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Food-experience listings are designed to surface their ALEX-listed suppliers — a proposed cross-link that lets visitor purchases trace back through the agri supply chain.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">South Coast Development Strategy</p>
+                    <p class="text-xs text-stone mt-1">MOT · NaRRA · TPDCo</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">HQ in Malvern (Edutourism corridor). Operations hub planned for Black River, near the new TPDCo office.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">TPDCo Team Jamaica</p>
+                    <p class="text-xs text-stone mt-1">TPDCo</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Vendor verification is designed to incorporate Team Jamaica training as a mandatory module — making BookedJA a Team Jamaica enrollment funnel.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">TEF SMTE Hub</p>
+                    <p class="text-xs text-stone mt-1">TEF</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Pilot vendor onboarding fees and insurance underwriting proposed as a TEF-supported line. Data-flow to TEF on vendor income impact.</td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-4">
+                    <p class="font-semibold">Destination Reputational Resilience</p>
+                    <p class="text-xs text-stone mt-1">Bartlett &amp; Waller, 2026</p>
+                  </td>
+                  <td class="px-5 py-4 text-ink/80">Verified-only listings + fixed pricing reduce harassment- and overcharging-driven reviews. Mystery shopper audits feed early-warning signals.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD MOCK -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="flex items-end justify-between flex-wrap gap-6">
+      <div>
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">03 · Data to the Ministry</p>
+        <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">A live window into small-operator income.</h2>
+      </div>
+      <p class="text-xs text-stone italic max-w-md">Dashboard mock — figures are conservative pilot projections (see Investment &amp; Vision 2030 brief for the model), not actuals. The live dashboard becomes a deliverable to TEF / TPDCo under a proposed data-sharing agreement.</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-12 gap-6">
+      <!-- KPI row -->
+      <div class="lg:col-span-3 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <p class="text-xs uppercase tracking-widest text-stone">Visitor spend routed</p>
+        <p class="font-display text-4xl font-semibold mt-2">J$ 9.8M</p>
+        <p class="mt-2 text-xs text-leaf font-semibold">projected · 6-month pilot</p>
+      </div>
+      <div class="lg:col-span-3 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <p class="text-xs uppercase tracking-widest text-stone">Active operators</p>
+        <p class="font-display text-4xl font-semibold mt-2">25 / 40</p>
+        <p class="mt-2 text-xs text-stone">projected · 40-operator target cohort</p>
+      </div>
+      <div class="lg:col-span-3 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <p class="text-xs uppercase tracking-widest text-stone">Avg operator monthly income</p>
+        <p class="font-display text-4xl font-semibold mt-2">~J$ 54k</p>
+        <p class="mt-2 text-xs text-stone">projected · vs. ~J$ 30k estimated pre-platform</p>
+      </div>
+      <div class="lg:col-span-3 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <p class="text-xs uppercase tracking-widest text-stone">Visitor NPS (target)</p>
+        <p class="font-display text-4xl font-semibold mt-2">+55</p>
+        <p class="mt-2 text-xs text-stone">vs. 23 industry benchmark</p>
+      </div>
+
+      <!-- Chart -->
+      <div class="lg:col-span-8 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-stone">Monthly visitor spend routed to South Coast operators (J$)</p>
+            <p class="font-display text-2xl font-semibold mt-1">6-month pilot ramp · illustrative</p>
+          </div>
+          <div class="flex items-center gap-3 text-xs text-stone">
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-ocean"></span>Tours</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-coral"></span>Food</span>
+            <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-leaf"></span>Transport</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 600 240" class="mt-5 w-full h-64">
+          <g font-family="Inter" font-size="10" fill="#5B6770">
+            <line x1="40" y1="200" x2="580" y2="200" stroke="#0A1F2E" stroke-opacity=".15"/>
+            <line x1="40" y1="160" x2="580" y2="160" stroke="#0A1F2E" stroke-opacity=".08"/>
+            <line x1="40" y1="120" x2="580" y2="120" stroke="#0A1F2E" stroke-opacity=".08"/>
+            <line x1="40" y1="80" x2="580" y2="80" stroke="#0A1F2E" stroke-opacity=".08"/>
+            <text x="0" y="200">0</text>
+            <text x="0" y="160">1M</text>
+            <text x="0" y="120">2M</text>
+            <text x="0" y="80">3M</text>
+            <text x="0" y="14">J$ (millions)</text>
+          </g>
+          <!-- 6 bars: Nov, Dec, Jan, Feb, Mar, Apr -->
+          <g>
+            <!-- bar group helper: each 60w with 80 gap; center positions: 90,170,250,330,410,490 -->
+            <!-- Nov 26 -->
+            <g transform="translate(75,0)">
+              <rect x="0" y="193" width="18" height="7" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="197" width="18" height="3" fill="#E76F51" rx="2"/>
+              <rect x="40" y="194" width="18" height="6" fill="#2A9D8F" rx="2"/>
+            </g>
+            <g transform="translate(155,0)">
+              <rect x="0" y="184" width="18" height="16" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="193" width="18" height="7" fill="#E76F51" rx="2"/>
+              <rect x="40" y="187" width="18" height="13" fill="#2A9D8F" rx="2"/>
+            </g>
+            <g transform="translate(235,0)">
+              <rect x="0" y="175" width="18" height="25" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="189" width="18" height="11" fill="#E76F51" rx="2"/>
+              <rect x="40" y="180" width="18" height="20" fill="#2A9D8F" rx="2"/>
+            </g>
+            <g transform="translate(315,0)">
+              <rect x="0" y="166" width="18" height="34" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="185" width="18" height="15" fill="#E76F51" rx="2"/>
+              <rect x="40" y="173" width="18" height="27" fill="#2A9D8F" rx="2"/>
+            </g>
+            <g transform="translate(395,0)">
+              <rect x="0" y="157" width="18" height="43" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="181" width="18" height="19" fill="#E76F51" rx="2"/>
+              <rect x="40" y="166" width="18" height="34" fill="#2A9D8F" rx="2"/>
+            </g>
+            <g transform="translate(475,0)">
+              <rect x="0" y="150" width="18" height="50" fill="#0F4C5C" rx="2"/>
+              <rect x="20" y="178" width="18" height="22" fill="#E76F51" rx="2"/>
+              <rect x="40" y="161" width="18" height="39" fill="#2A9D8F" rx="2"/>
+            </g>
+          </g>
+          <g font-family="Inter" font-size="11" fill="#0A1F2E">
+            <text x="105" y="222" text-anchor="middle">M1</text>
+            <text x="185" y="222" text-anchor="middle">M2</text>
+            <text x="265" y="222" text-anchor="middle">M3</text>
+            <text x="345" y="222" text-anchor="middle">M4</text>
+            <text x="425" y="222" text-anchor="middle">M5</text>
+            <text x="505" y="222" text-anchor="middle">M6</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Map / heatmap -->
+      <div class="lg:col-span-4 rounded-3xl border border-ink/10 p-6 bg-paper">
+        <p class="text-xs uppercase tracking-widest text-stone">Spend distribution by town</p>
+        <ul class="mt-4 space-y-3 text-sm">
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Black River</span><span class="text-stone">28%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-ocean" style="width:28%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Treasure Beach</span><span class="text-stone">22%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-coral" style="width:22%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Pelican Bar / Parottee</span><span class="text-stone">14%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-gold" style="width:14%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">YS Falls / Maggotty</span><span class="text-stone">12%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-leaf" style="width:12%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Appleton</span><span class="text-stone">10%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-ocean-2" style="width:10%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Bluefields / Whitehouse</span><span class="text-stone">8%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-stone" style="width:8%"></div></div>
+          </li>
+          <li>
+            <div class="flex justify-between"><span class="font-semibold">Little Ochi / Lover's Leap</span><span class="text-stone">6%</span></div>
+            <div class="mt-1 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-ink" style="width:6%"></div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="bg-ink text-paper">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="grid lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-4">
+          <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">04 · Roadmap</p>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">A pilot, then a scale plan.</h2>
+          <p class="mt-5 text-paper/75 leading-relaxed">A 12-month plan from soft launch to islandwide readiness — each phase tied to a TPDCo, TEF or MOT milestone.</p>
+        </div>
+        <ol class="lg:col-span-8 space-y-5">
+          <li class="rounded-2xl bg-paper/5 border border-paper/10 p-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <p class="font-display text-xl font-semibold">Phase 0 · Foundation</p>
+              <p class="text-xs uppercase tracking-widest text-gold">Pre-launch</p>
+            </div>
+            <p class="mt-2 text-paper/80 text-sm leading-relaxed">Vendor recruitment in Black River + Treasure Beach. 40-operator target cohort verified. TPDCo Team Jamaica training delivered. MOU with TEF + TPDCo.</p>
+          </li>
+          <li class="rounded-2xl bg-paper/5 border border-paper/10 p-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <p class="font-display text-xl font-semibold">Phase 1 · Soft launch</p>
+              <p class="text-xs uppercase tracking-widest text-gold">Launch</p>
+            </div>
+            <p class="mt-2 text-paper/80 text-sm leading-relaxed">Public launch on the South Coast. Marketing through MOT diaspora channels. Data dashboard live to TEF.</p>
+          </li>
+          <li class="rounded-2xl bg-paper/5 border border-paper/10 p-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <p class="font-display text-xl font-semibold">Phase 2 · South Coast scale</p>
+              <p class="text-xs uppercase tracking-widest text-gold">+1–2 quarters</p>
+            </div>
+            <p class="mt-2 text-paper/80 text-sm leading-relaxed">Expand to 150+ vendors. Add Authentic Stays. Add Crafts. First post-pilot impact report to MOT.</p>
+          </li>
+          <li class="rounded-2xl bg-paper/5 border border-paper/10 p-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <p class="font-display text-xl font-semibold">Phase 3 · Adjacent regions</p>
+              <p class="text-xs uppercase tracking-widest text-gold">+3 quarters</p>
+            </div>
+            <p class="mt-2 text-paper/80 text-sm leading-relaxed">Mandeville &amp; Malvern Edutourism corridor. Portland community tourism. Port Antonio.</p>
+          </li>
+          <li class="rounded-2xl bg-paper/5 border border-paper/10 p-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <p class="font-display text-xl font-semibold">Phase 4 · Islandwide</p>
+              <p class="text-xs uppercase tracking-widest text-gold">Year 2+</p>
+            </div>
+            <p class="mt-2 text-paper/80 text-sm leading-relaxed">Negril, Montego Bay, Ocho Rios — applying the same verification model where harassment management is the dominant visitor pain point.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP ASK -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">05 · Partnership ask</p>
+        <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">
+          A coordinated, named partnership.
+        </h2>
+      </div>
+      <div class="lg:col-span-8 space-y-4">
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">Ministry of Tourism</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Public endorsement of BookedJA as a "Tourism 3.0 South Coast Digital Channel." A joint South Coast launch event.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">TPDCo</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Team Jamaica training delivered to pilot cohort. Verification co-signature. Licensing fast-track for pilot operators.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">Tourism Enhancement Fund</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">SMTE Hub-aligned funding to underwrite verification cost per vendor (~US$120 per operator) and seed-pool the public-liability insurance product for pilot cohort.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">Tourism Linkages Network</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Cross-link to ALEX: food-experience listings surface their ALEX-listed suppliers, closing the supply-to-visitor loop in one journey.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">NaRRA</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Coordinate with Black River streetscape and South Coast infrastructure programs so BookedJA's vendor placement reinforces visible regeneration.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">Jamaica Tourist Board</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">License-status API integration. Diaspora and source-market marketing co-amplification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK / MITIGATION -->
+  <section class="bg-sand/40 border-y border-ink/5">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">06 · Risks &amp; mitigations</p>
+      <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">We've thought about what can go wrong.</h2>
+
+      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Cold-start of supply</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">Mitigated by a curated 40-vendor pilot cohort recruited before public marketing begins, supported by Team Jamaica training.</p>
+        </div>
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Informal-vendor exclusion</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">"Top Local vouching" pathway allows experienced informal operators in without formal docs, protected by graduated tier system.</p>
+        </div>
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Off-platform leakage</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">Escrow + insurance + dispute resolution + repeat-visitor mechanics make on-platform booking the dominant choice for both sides.</p>
+        </div>
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Negative review event</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">Reputational resilience playbook aligned with Bartlett &amp; Waller framework. Three-strike vendor demerit. Mystery shopper audits.</p>
+        </div>
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Hurricane / disruption</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">Full refund + reschedule policy. Operator income protection pool funded from platform fee in disaster windows.</p>
+        </div>
+        <div class="rounded-3xl bg-paper p-6 border border-ink/10">
+          <p class="font-display text-lg font-semibold">Trust gap with all-inclusives</p>
+          <p class="mt-2 text-sm text-ink/75 leading-relaxed">Concierge integration program — hotels earn referral fee for sending guests to BookedJA, turning a competitor relationship into a channel partner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="max-w-7xl mx-auto px-6 py-24">
+    <div class="rounded-3xl bg-ink text-paper p-10 sm:p-14 relative overflow-hidden">
+      <div class="absolute -right-32 -bottom-32 w-[420px] h-[420px] rounded-full" style="background:radial-gradient(closest-side, rgba(233,184,36,.35), transparent)"></div>
+      <div class="relative grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Next step</p>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Let's brief the Ministry team in Kingston.</h2>
+          <p class="mt-5 text-paper/80 max-w-xl leading-relaxed">
+            We're seeking a 45-minute working session with the Ministry of Tourism,
+            TPDCo and TEF to walk through the alignment matrix, the pilot operating
+            plan and the data-sharing architecture.
+          </p>
+        </div>
+        <div class="lg:col-span-5">
+          <ul class="space-y-3 text-paper/85 text-sm">
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">Founder</span><span class="font-semibold">Emil Simms</span></li>
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">Email</span><span class="font-semibold">emilsimms@gmail.com</span></li>
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">WhatsApp</span><span class="font-semibold">+1 (613) 290-3791</span></li>
+            <li class="flex justify-between"><span class="text-paper/60">Head office</span><span class="font-semibold">Malvern, St. Elizabeth</span></li>
+            <li class="flex justify-between"><span class="text-paper/60">Operations hub</span><span class="font-semibold">Black River (planned)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-paper border-t border-ink/10">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-stone">
+      <div class="brand-lockup brand-lockup--sm">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </div>
+      <p>© 2026 BookedJA · Ministry &amp; Partner Brief · v0.1</p>
+      <p class="w-full text-[11px] text-stone/80 italic">BookedJA is an independent initiative of MyShamba Ltd. References to ministries, agencies and programmes describe intended policy alignment and proposed partnerships — not current affiliation or endorsement.</p>
+      <nav class="flex items-center gap-5">
+        <a href="./index.html" class="hover:text-ocean">Home</a>
+        <a href="./jampro.html" class="hover:text-ocean">JAMPRO brief</a>
+        <a href="./portfolio-one-pager.html" class="hover:text-ocean">Portfolio</a>
+        <a href="./experiences.html" class="hover:text-ocean">Live demo</a>
+        <a href="./vendor-dashboard.html" class="hover:text-ocean">Vendor demo</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

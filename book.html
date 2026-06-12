@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Confirm your booking</title>
+  <meta name="description" content="Check your details, pay safely, and get your BookedJA pass. Your money is held until the experience is done." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#root">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__in">
+      <a href="./index.html" class="brand-lockup" aria-label="BookedJA home">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <span class="badge badge--ok">🔒 Safe checkout</span>
+    </div>
+  </header>
+
+  <main id="root" tabindex="-1" class="container container--narrow section--tight">
+    <p class="muted center" style="padding:4rem 0">Loading…</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA</span>
+        <span>Prototype checkout — no real payment is taken</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  function render(v, params) {
+    const isTransport = v.category === 'Transport';
+    const guests = Math.max(1, parseInt(params.guests || '1', 10));
+    const totalUSD = v.pricePerPersonUSD * (isTransport ? 1 : guests);
+    const totalJMD = totalUSD * USD_TO_JMD;
+    const name = safeText(v.name);
+    const title = safeText(v.title);
+
+    document.getElementById('root').innerHTML = `
+      <a href="./vendor-detail.html?id=${encodeURIComponent(v.id)}" class="muted small" style="text-decoration:none">← Back to ${name}</a>
+      <h1 class="mt-2" style="font-size:clamp(1.8rem,5vw,2.4rem)">Almost there.</h1>
+      <p class="lead mt-2">Check everything looks right. You only pay when you tap the green button.</p>
+
+      <!-- What you're booking -->
+      <section class="card mt-4">
+        <div class="flex items-center gap-3">
+          <img src="${v.image}" alt="" style="width:72px;height:72px;border-radius:16px;object-fit:cover" />
+          <div>
+            <p class="bold" style="font-size:1.1rem">${title}</p>
+            <p class="muted small">${safeText(v.town)} · with ${name}</p>
+          </div>
+        </div>
+        <div class="grid grid--3 mt-3" style="gap:.7rem">
+          <div class="fact"><p>Day</p><p>${fmtDate(params.date)}</p></div>
+          <div class="fact"><p>Time</p><p>${safeText(params.time)}</p></div>
+          <div class="fact"><p>People</p><p>${guests}</p></div>
+        </div>
+      </section>
+
+      <!-- Your details -->
+      <section class="card mt-3">
+        <h2 style="font-size:1.3rem">Who's coming?</h2>
+        <p class="muted small mt-1">So ${name} knows who to look for.</p>
+        <div id="formErr" class="notice notice--bad mt-3 hidden" role="alert"></div>
+        <div class="mt-3">
+          <label class="field">
+            <span>Your name</span>
+            <input id="vName" class="input" type="text" autocomplete="name" placeholder="e.g. Hannah Petersen" required />
+          </label>
+          <label class="field">
+            <span>WhatsApp number</span>
+            <input id="vPhone" class="input" type="tel" autocomplete="tel" inputmode="tel" placeholder="+44 7700 900000" required />
+            <span class="hint">We send your pass and any updates here.</span>
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input id="vEmail" class="input" type="email" autocomplete="email" placeholder="you@example.com" required />
+          </label>
+          <label class="field">
+            <span>Anything ${name} should know? <span class="faded" style="font-weight:500">(optional)</span></span>
+            <textarea id="vNote" class="input" rows="2" placeholder="Allergies, kids, accessibility…"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <!-- Payment -->
+      <section class="card mt-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <h2 style="font-size:1.3rem">Payment</h2>
+          <span class="badge badge--warn">Demo — no real charge</span>
+        </div>
+        <div class="mt-3">
+          <label class="field">
+            <span>Card number</span>
+            <input id="cardNum" class="input" type="text" inputmode="numeric" placeholder="4242 4242 4242 4242" maxlength="19" />
+          </label>
+          <div class="grid grid--2" style="gap:1rem">
+            <label class="field">
+              <span>Expiry</span>
+              <input id="cardExp" class="input" type="text" placeholder="MM / YY" maxlength="7" />
+            </label>
+            <label class="field">
+              <span>CVC</span>
+              <input id="cardCvc" class="input" type="text" inputmode="numeric" placeholder="123" maxlength="4" />
+            </label>
+          </div>
+        </div>
+        <div class="notice notice--ok mt-3">
+          <p class="bold">Your money is protected.</p>
+          <p class="small muted mt-1">We hold it safely and only pay ${name} after your experience is done. If it's cancelled, you get it back per the cancellation policy.</p>
+        </div>
+      </section>
+
+      <!-- Total + confirm -->
+      <section class="card mt-3" style="border:2px solid var(--green)">
+        <div class="summary-row"><span class="muted">${fmtUSD(v.pricePerPersonUSD)} ${isTransport ? 'fixed fare' : '× ' + guests + (guests > 1 ? ' people' : ' person')}</span><strong>${fmtUSD(totalUSD)}</strong></div>
+        <div class="summary-row small"><span class="faded">In Jamaican dollars</span><span class="faded">≈ ${fmtJMD(totalJMD)}</span></div>
+        <div class="summary-total"><span class="bold" style="font-size:1.15rem">Total today</span><span class="amt">${fmtUSD(totalUSD)}</span></div>
+        <button type="button" id="confirmBtn" class="btn btn--primary btn--big btn--block mt-3">Confirm &amp; pay ${fmtUSD(totalUSD)}</button>
+        <p class="small muted center mt-2">Your pass appears right away — keep it on your phone.</p>
+      </section>
+    `;
+
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+      const nameVal = cleanText(document.getElementById('vName').value);
+      const email = cleanText(document.getElementById('vEmail').value);
+      const phone = cleanText(document.getElementById('vPhone').value);
+      const note = cleanText(document.getElementById('vNote').value);
+      const err = document.getElementById('formErr');
+
+      ['vName', 'vPhone', 'vEmail'].forEach(id => document.getElementById(id).classList.remove('is-bad'));
+      let bad = null;
+      if (!nameVal) bad = ['vName', 'Please add your name.'];
+      else if (!phone) bad = ['vPhone', 'Please add your WhatsApp number — your pass goes there.'];
+      else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) bad = ['vEmail', 'Please add a valid email address.'];
+      if (bad) {
+        err.textContent = bad[1];
+        err.classList.remove('hidden');
+        const el = document.getElementById(bad[0]);
+        el.classList.add('is-bad');
+        el.focus();
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        return;
+      }
+      err.classList.add('hidden');
+
+      const ref = generateBookingRef();
+      addBooking({
+        id: ref,
+        vendorId: v.id, vendorName: v.name, experienceTitle: v.title,
+        town: v.town, durationHrs: v.durationHrs, image: v.image,
+        date: params.date, time: params.time, guests,
+        pricePerPersonUSD: v.pricePerPersonUSD, totalUSD, totalJMD,
+        feeRate: PLATFORM_FEE, // snapshot so later fee changes don't alter past payouts
+        visitorName: nameVal, visitorEmail: email, visitorPhone: phone, visitorNote: note,
+        status: 'confirmed',
+        createdAt: new Date().toISOString()
+      });
+      location.href = './pass.html?ref=' + encodeURIComponent(ref) + '&new=1';
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = {
+      vendor: getQuery('vendor'),
+      date: getQuery('date'),
+      // strip markup-significant chars and cap length: stored on the booking and
+      // rendered on the pass, dashboard and scan pages
+      time: cleanText((getQuery('time') || '').replace(/[<>&"']/g, '')).slice(0, 20),
+      guests: getQuery('guests')
+    };
+    const v = getVendor(params.vendor);
+    if (!v || !params.date) {
+      document.getElementById('root').innerHTML = `
+        <div class="center" style="padding:4rem 0">
+          <h1 style="font-size:1.8rem">We couldn't load that booking</h1>
+          <a href="./experiences.html" class="btn btn--primary mt-4">Browse things to do</a>
+        </div>`;
+      return;
+    }
+    render(v, params);
+  });
+</script>
+</body>
+</html>

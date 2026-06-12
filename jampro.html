@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Investment & Vision 2030 Brief (JAMPRO)</title>
+  <meta name="description" content="An investment-ready, Vision 2030 Jamaica-aligned digital marketplace retaining tourism foreign exchange on Jamaica's South Coast. Prepared for JAMPRO." />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css">
+  <script src="./assets/tailwind.js"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['Fraunces','ui-serif','Georgia','serif'], sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+      colors: { ink:'#0A1F2E', paper:'#FAF7F2', ocean:'#0F4C5C','ocean-2':'#2C7DA0', coral:'#E76F51', gold:'#E9B824', leaf:'#2A9D8F', sand:'#E9DCC9', stone:'#5B6770' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      @page { size: A4; margin: 12mm; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-paper/85 border-b border-ink/5 no-print">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="./index.html" class="brand-lockup">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/80">
+        <a href="./experiences.html" class="hover:text-ocean">Experiences</a>
+        <a href="./ministry.html" class="hover:text-ocean">For Ministry</a>
+        <a href="./jampro.html" class="text-ocean font-semibold">For JAMPRO</a>
+      </nav>
+      <a href="#contact" class="inline-flex items-center rounded-full bg-ink text-paper px-4 py-2 text-sm font-medium hover:bg-ocean transition">Request a meeting</a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+  <!-- COVER -->
+  <section class="relative">
+    <div class="absolute inset-0 -z-10 bg-cover bg-center" style="background-image:url('./assets/images/hero-coast.jpg')"></div>
+    <div class="absolute inset-0 -z-10" style="background:linear-gradient(135deg, rgba(10,31,46,.86) 0%, rgba(15,76,92,.80) 60%, rgba(44,125,160,.66) 100%)"></div>
+    <div class="max-w-7xl mx-auto px-6 pt-24 pb-28 text-paper">
+      <div class="max-w-4xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-gold font-semibold">Investment &amp; Vision 2030 Brief · Prepared for JAMPRO</p>
+        <h1 class="mt-5 font-display text-5xl sm:text-7xl font-semibold leading-[1.02] tracking-tight">
+          Keeping tourism's<br/>
+          <span class="italic text-gold">dollars in Jamaica.</span>
+        </h1>
+        <p class="mt-7 text-lg sm:text-2xl text-paper/85 leading-snug max-w-3xl">
+          The Caribbean loses an estimated <strong class="text-paper">70&ndash;80&cent; of every tourist dollar</strong>
+          to imports, foreign-owned operators and offshore booking platforms. BookedJA is a
+          Jamaican-owned digital marketplace built to reverse that on the South Coast &mdash;
+          routing visitor spend directly to verified local operators.
+        </p>
+        <div class="mt-10 grid sm:grid-cols-4 gap-4 max-w-3xl text-paper">
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Operator share</p>
+            <p class="font-display text-xl font-semibold mt-1">~82&cent; / $1</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Platform fee</p>
+            <p class="font-display text-xl font-semibold mt-1">~18% (onshore)</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Pilot launch</p>
+            <p class="font-display text-xl font-semibold mt-1">Planned (date TBC)</p>
+          </div>
+          <div class="rounded-2xl bg-paper/10 p-5 backdrop-blur">
+            <p class="text-[10px] uppercase tracking-widest text-paper/60">Status</p>
+            <p class="font-display text-xl font-semibold mt-1">Investment-ready</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION A — ECONOMIC CASE -->
+  <section class="max-w-7xl mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-4">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">01 · The economic case</p>
+        <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Foreign exchange, retained at source.</h2>
+        <p class="mt-5 text-ink/75 leading-relaxed">
+          Jamaica earns world-leading visitor arrivals &mdash; but loses most of the off-resort
+          experience economy to offshore intermediaries. Every booking on BookedJA will be captured
+          by a Jamaican-licensed merchant and settled to a local operator.
+        </p>
+      </div>
+      <div class="lg:col-span-8 space-y-4">
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <p class="font-display text-xl font-semibold text-ocean">FX retained onshore</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Visitor card spend (often USD) will be processed by a Jamaican-licensed gateway such as WiPay or First Atlantic Commerce, not an offshore OTA. ~82&cent; of every dollar reaches the local operator; the ~18% platform fee also stays onshore with a Jamaican company.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <p class="font-display text-xl font-semibold text-ocean">Import-substitution of the booking layer</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Foreign platforms (Viator, GetYourGuide, Airbnb) extract 20&ndash;40% commission that leaves the island. BookedJA replaces that with a domestic ~18% fee &mdash; a like-for-like substitution of an imported service.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <p class="font-display text-xl font-semibold text-ocean">Formalization of the informal economy</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">The vast majority of South Coast micro-operators have no digital booking channel. BookedJA brings them into a verified, bankable, traceable system &mdash; widening the formal tax base and generating real economic data for the State.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 bg-paper p-6">
+          <p class="font-display text-xl font-semibold text-ocean">Dignified rural employment &amp; diaspora capital</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Direct operator income plus support roles in St. Elizabeth, amplified by diaspora-targeted demand and a diaspora investment pathway.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODEL TABLE — headline view -->
+    <div class="mt-16">
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <h3 class="font-display text-2xl sm:text-3xl font-semibold">A conservative 3-year pilot &mdash; small numbers, real money, all onshore</h3>
+        <p class="text-xs text-stone italic max-w-md">Illustrative projections in USD, not actuals. Full workings and assumptions in the appendix below.</p>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-ink/10 bg-paper">
+        <table class="w-full text-sm sm:text-base">
+          <thead class="bg-ink text-paper">
+            <tr>
+              <th class="text-left font-medium px-5 py-3.5">USD</th>
+              <th class="text-right font-medium px-5 py-3.5">Year 1</th>
+              <th class="text-right font-medium px-5 py-3.5">Year 2</th>
+              <th class="text-right font-medium px-5 py-3.5">Year 3</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink/5">
+            <tr><td class="px-5 py-4">Operators on the platform</td><td class="px-5 py-4 text-right font-semibold">25</td><td class="px-5 py-4 text-right font-semibold">60</td><td class="px-5 py-4 text-right font-semibold">120</td></tr>
+            <tr class="bg-sand/30"><td class="px-5 py-4 font-semibold">Total bookings (GBV)</td><td class="px-5 py-4 text-right font-semibold">$120k</td><td class="px-5 py-4 text-right font-semibold">$400k</td><td class="px-5 py-4 text-right font-semibold">$920k</td></tr>
+            <tr><td class="px-5 py-4 text-leaf font-semibold">Paid directly to operators (82%)</td><td class="px-5 py-4 text-right text-leaf font-semibold">$98k</td><td class="px-5 py-4 text-right text-leaf font-semibold">$330k</td><td class="px-5 py-4 text-right text-leaf font-semibold">$756k</td></tr>
+            <tr class="bg-coral/5"><td class="px-5 py-4 font-semibold">FX kept in Jamaica vs offshore OTA*</td><td class="px-5 py-4 text-right font-semibold">~$30k</td><td class="px-5 py-4 text-right font-semibold">~$100k</td><td class="px-5 py-4 text-right font-semibold">~$230k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-stone leading-relaxed">Assumes US$80 average booking, 5&ndash;8 bookings/operator/month, 18% take rate. <strong>*FX line</strong> = the ~25% commission a foreign OTA would extract offshore on the same bookings. Conservative placeholders, to be re-baselined with TPDCo/TEF pilot data.</p>
+
+      <blockquote class="mt-8 rounded-2xl border-l-4 border-gold bg-gold/10 p-6 max-w-3xl">
+        <p class="font-display text-lg sm:text-xl leading-snug text-ink">&ldquo;By Year 3, 120 verified operators handle just under US$1M in bookings &mdash; and because we're onshore, all of it stays in Jamaica: 82% goes straight to operators, our 18% is taxable local revenue, and roughly $230,000 that a foreign OTA would have taken offshore stays here instead.&rdquo;</p>
+        <p class="mt-3 text-xs text-stone">These are floor numbers we want TPDCo and TEF to pressure-test &mdash; not ceiling numbers we're selling.</p>
+      </blockquote>
+
+      <!-- Appendix: full workings -->
+      <details class="mt-8 rounded-2xl border border-ink/10 bg-paper overflow-hidden group">
+        <summary class="cursor-pointer list-none px-6 py-4 flex items-center justify-between gap-4 font-semibold text-sm hover:bg-sand/30 transition">
+          <span>Appendix &middot; Full model workings &amp; assumptions</span>
+          <span class="text-stone text-xs group-open:hidden">Show +</span>
+          <span class="text-stone text-xs hidden group-open:inline">Hide &minus;</span>
+        </summary>
+        <div class="border-t border-ink/10">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-sand/40 text-stone text-xs uppercase tracking-widest">
+                <tr>
+                  <th class="text-left font-semibold px-5 py-3">Metric (USD unless noted)</th>
+                  <th class="text-right font-semibold px-5 py-3">Year 1</th>
+                  <th class="text-right font-semibold px-5 py-3">Year 2</th>
+                  <th class="text-right font-semibold px-5 py-3">Year 3</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-ink/5">
+                <tr><td class="px-5 py-3">Active operators (period average)</td><td class="px-5 py-3 text-right">25</td><td class="px-5 py-3 text-right">60</td><td class="px-5 py-3 text-right">120</td></tr>
+                <tr><td class="px-5 py-3">Bookings / operator / month</td><td class="px-5 py-3 text-right">5</td><td class="px-5 py-3 text-right">7</td><td class="px-5 py-3 text-right">8</td></tr>
+                <tr><td class="px-5 py-3">Gross booking value (GBV)</td><td class="px-5 py-3 text-right">$120,000</td><td class="px-5 py-3 text-right">$403,200</td><td class="px-5 py-3 text-right">$921,600</td></tr>
+                <tr><td class="px-5 py-3">Operator earnings (82%)</td><td class="px-5 py-3 text-right">$98,400</td><td class="px-5 py-3 text-right">$330,624</td><td class="px-5 py-3 text-right">$755,712</td></tr>
+                <tr><td class="px-5 py-3">Platform revenue, onshore (18%)</td><td class="px-5 py-3 text-right">$21,600</td><td class="px-5 py-3 text-right">$72,576</td><td class="px-5 py-3 text-right">$165,888</td></tr>
+                <tr><td class="px-5 py-3">Avg operator income / month</td><td class="px-5 py-3 text-right">~$328</td><td class="px-5 py-3 text-right">~$459</td><td class="px-5 py-3 text-right">~$525</td></tr>
+                <tr><td class="px-5 py-3">FX leakage avoided vs offshore OTA</td><td class="px-5 py-3 text-right">~$30,000</td><td class="px-5 py-3 text-right">~$100,800</td><td class="px-5 py-3 text-right">~$230,400</td></tr>
+                <tr><td class="px-5 py-3">Operators formalized (cumulative)</td><td class="px-5 py-3 text-right">~40</td><td class="px-5 py-3 text-right">~80</td><td class="px-5 py-3 text-right">150+</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="px-6 py-5 bg-sand/30 text-xs text-ink/70 leading-relaxed">
+            <p class="font-semibold text-ink uppercase tracking-widest text-[10px]">Assumptions (conservative)</p>
+            <p class="mt-2">Take rate 18%. Average gross booking value US$80 (blend of ~US$45 tours at 2 guests, US$65&ndash;85 food experiences, US$135 transfers). Operator and booking ramp as shown. FX leakage avoided = the ~25% commission a foreign OTA would extract offshore on the same GBV, here retained in Jamaica. &ldquo;Active operators&rdquo; are period averages; &ldquo;operators formalized&rdquo; is the cumulative count of all hosts verified since launch, so it exceeds the average. At J$158 = US$1, Year-3 GBV is ~J$145.6M and average operator income ~J$82.9k/month. Figures are deliberately conservative starting points to be replaced by TPDCo/TEF-baselined pilot data.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- SECTION B — VISION 2030 -->
+  <section class="bg-ink text-paper">
+    <div class="max-w-7xl mx-auto px-6 py-24">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-4">
+          <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">02 · Vision 2030 Jamaica</p>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Built into the National Development Plan.</h2>
+          <p class="mt-5 text-paper/75 leading-relaxed">BookedJA advances 5 of the 15 National Outcomes of Vision 2030 Jamaica, led by the Planning Institute of Jamaica (PIOJ).</p>
+        </div>
+        <div class="lg:col-span-8">
+          <div class="overflow-hidden rounded-2xl border border-paper/15">
+            <table class="w-full text-sm">
+              <thead class="bg-paper/10">
+                <tr>
+                  <th class="text-left font-medium px-5 py-3 w-1/3">National Outcome</th>
+                  <th class="text-left font-medium px-5 py-3">BookedJA delivery</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-paper/10 align-top text-paper/85">
+                <tr><td class="px-5 py-4 font-semibold">#4 Authentic &amp; Transformational Culture</td><td class="px-5 py-4">Turns Maroon heritage, fishing-village cuisine and craft into bookable, dignified cultural product.</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">#8 An Enabling Business Environment</td><td class="px-5 py-4">Digitizes and formalizes informal micro-operators into a compliant, bankable marketplace.</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">#9 Strong Economic Infrastructure</td><td class="px-5 py-4">Supplies the missing digital booking + payments rail for the rural South Coast economy.</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">#11 A Technology-Enabled Society</td><td class="px-5 py-4">Brings cashless escrow payments and digital verification to operators with no prior online presence.</td></tr>
+                <tr><td class="px-5 py-4 font-semibold">#12 Internationally Competitive Industry Structures</td><td class="px-5 py-4">A Jamaican-owned alternative to foreign OTAs that retains value and margin onshore.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-5 text-sm text-paper/70">Aligned SDGs: 1 (No Poverty), 8 (Decent Work &amp; Growth), 10 (Reduced Inequalities), 12 (Responsible Consumption), 17 (Partnerships). Tourism is one of the 31 sector plans under Vision 2030 Jamaica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO CROSS-LINK -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <div class="rounded-3xl border border-ink/10 bg-sand/40 p-8 sm:p-10 grid lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">Part of a two-venture St. Elizabeth thesis</p>
+        <h2 class="mt-3 font-display text-3xl sm:text-4xl font-semibold leading-tight">BookedJA + Glenda's Shamba</h2>
+        <p class="mt-4 text-ink/75 leading-relaxed max-w-2xl">The same founder is building both the destination and the channel that fills it: <strong>Glenda's Shamba</strong> (an operational agritourism anchor &mdash; tea house, cultural gallery, wellness guesthouse, honey &amp; herb export) and <strong>BookedJA</strong> (the digital distribution layer). Together they form a Vision-2030-aligned agribusiness + tourism + digital-services cluster.</p>
+      </div>
+      <div class="lg:col-span-4 lg:text-right">
+        <a href="./portfolio-one-pager.html" class="inline-flex items-center gap-2 rounded-full bg-ink text-paper px-6 py-3 text-sm font-semibold hover:bg-ocean transition">
+          View the portfolio one-pager
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION C — THE ASK -->
+  <section class="max-w-7xl mx-auto px-6 pb-24">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="text-xs uppercase tracking-[0.2em] text-coral font-semibold">03 · What we're seeking from JAMPRO</p>
+        <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Facilitation, incentives, and direction.</h2>
+      </div>
+      <div class="lg:col-span-8 space-y-4">
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">1 · Investment facilitation</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Guidance and introductions for a seed raise (diaspora + impact capital) to fund the pilot-to-scale build.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">2 · Incentive direction</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Confirmation of which regimes apply &mdash; the Foreign Investment Act / 30% Employment Tax Credit, duty concessions on technology and equipment, and any global digital-services / creative-industry incentives, given BookedJA is a Jamaican-owned software platform.</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">3 · Programme linkage</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">Introductions to DBJ (financing / grants), JBDC (SME support), the Tourism Enhancement Fund (vendor onboarding &amp; insurance underwriting), and the Tourism Linkages Network / ALEX (supply-chain cross-link).</p>
+        </div>
+        <div class="rounded-2xl border border-ink/10 p-6 bg-paper">
+          <p class="font-display text-xl font-semibold text-ocean">4 · Validation</p>
+          <p class="mt-2 text-ink/75 text-sm leading-relaxed">A letter of support positioning BookedJA as a Vision 2030 / Tourism-3.0 South Coast digital channel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="max-w-7xl mx-auto px-6 pb-24">
+    <div class="rounded-3xl bg-ink text-paper p-10 sm:p-14 relative overflow-hidden">
+      <div class="absolute -right-32 -bottom-32 w-[420px] h-[420px] rounded-full" style="background:radial-gradient(closest-side, rgba(233,184,36,.35), transparent)"></div>
+      <div class="relative grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
+          <p class="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Next step</p>
+          <h2 class="mt-3 font-display text-4xl sm:text-5xl font-semibold leading-tight">Let's discuss facilitation &amp; incentives.</h2>
+          <p class="mt-5 text-paper/80 max-w-xl leading-relaxed">We welcome a working session with JAMPRO to walk through the economic model, the Vision 2030 alignment, and the path to a Jamaican-owned, FX-retaining South Coast digital channel.</p>
+        </div>
+        <div class="lg:col-span-5">
+          <ul class="space-y-3 text-paper/85 text-sm">
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">Founder</span><span class="font-semibold">Emil Simms</span></li>
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">Email</span><span class="font-semibold">emilsimms@gmail.com</span></li>
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">WhatsApp</span><span class="font-semibold">+1 (613) 290-3791</span></li>
+            <li class="flex justify-between border-b border-paper/15 pb-3"><span class="text-paper/60">Company</span><span class="font-semibold">MyShamba Ltd</span></li>
+            <li class="flex justify-between"><span class="text-paper/60">Head office</span><span class="font-semibold">Malvern, St. Elizabeth</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-paper border-t border-ink/10">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm text-stone">
+      <div class="brand-lockup brand-lockup--sm">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </div>
+      <p>© 2026 BookedJA · MyShamba Ltd · Investment &amp; Vision 2030 Brief</p>
+      <p class="w-full text-[11px] text-stone/80 italic">BookedJA is an independent initiative of MyShamba Ltd. References to ministries, agencies and programmes describe intended policy alignment and proposed partnerships — not current affiliation or endorsement.</p>
+      <nav class="flex items-center gap-5 no-print">
+        <a href="./index.html" class="hover:text-ocean">Home</a>
+        <a href="./ministry.html" class="hover:text-ocean">Ministry brief</a>
+        <a href="./portfolio-one-pager.html" class="hover:text-ocean">Portfolio</a>
+        <a href="./experiences.html" class="hover:text-ocean">Live demo</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — My bookings</title>
+  <meta name="description" content="Your BookedJA passes and bookings — saved on this phone, available offline." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__in">
+      <a href="./index.html" class="brand-lockup" aria-label="BookedJA home">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="site-nav" id="siteNav" aria-label="Main">
+        <a href="./experiences.html">Things to do</a>
+        <a href="./my-bookings.html" aria-current="page">My bookings</a>
+        <a href="./vendors.html">For operators</a>
+        <a href="./about.html">About</a>
+      </nav>
+      <a href="./experiences.html" class="btn btn--primary btn--small header-cta">Book something</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="container container--mid section--tight">
+    <span class="kicker">Saved on this phone — works offline</span>
+    <h1 class="mt-2">My bookings</h1>
+    <div id="list" class="mt-4"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA</span>
+        <span>Prototype — bookings live on this device only</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  function statusBadge(s) {
+    const m = {
+      confirmed:   ['✓ Booked', 'badge--ok'],
+      in_progress: ['Happening now', 'badge--warn'],
+      completed:   ['Completed', 'badge--neutral'],
+      cancelled:   ['Cancelled', 'badge--bad']
+    }[s] || [s, 'badge--neutral'];
+    return `<span class="badge ${m[1]}">${m[0]}</span>`;
+  }
+
+  function rowHTML(b) {
+    return `
+      <a href="./pass.html?ref=${encodeURIComponent(b.id)}" class="xcard" style="flex-direction:row;align-items:center;gap:0">
+        <img src="${b.image}" alt="" loading="lazy" style="width:96px;height:96px;object-fit:cover;flex-shrink:0" />
+        <div class="xcard__body" style="padding:.9rem 1.1rem">
+          <p class="xcard__meta">${fmtDate(b.date)} · ${safeText(b.time)} · ${b.guests} ${b.guests > 1 ? 'people' : 'person'}</p>
+          <p class="xcard__title" style="font-size:1.1rem">${safeText(b.experienceTitle)}</p>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            ${statusBadge(b.status)}
+            <span class="tiny faded">Ref ${safeText(b.id)}</span>
+          </div>
+        </div>
+      </a>`;
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const all = getBookings().slice().sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time));
+    const today = new Date().toISOString().slice(0, 10);
+    const upcoming = all.filter(b => b.date >= today && b.status !== 'cancelled' && b.status !== 'completed').reverse();
+    const past = all.filter(b => !upcoming.includes(b));
+    const el = document.getElementById('list');
+
+    if (!all.length) {
+      el.innerHTML = `
+        <div class="card card--tint center" style="padding:3rem 1.5rem">
+          <p class="font-display bold" style="font-size:1.5rem">Nothing booked yet</p>
+          <p class="muted mt-2">When you book, your pass lives here — even with no internet.</p>
+          <a href="./experiences.html" class="btn btn--primary btn--big mt-4">See things to do</a>
+        </div>`;
+      return;
+    }
+
+    el.innerHTML = `
+      ${upcoming.length ? `<h2 style="font-size:1.35rem">Coming up</h2><div class="stack mt-3">${upcoming.map(rowHTML).join('')}</div>` : ''}
+      ${past.length ? `<h2 class="mt-5" style="font-size:1.35rem">Earlier</h2><div class="stack mt-3">${past.map(rowHTML).join('')}</div>` : ''}
+    `;
+  });
+</script>
+</body>
+</html>

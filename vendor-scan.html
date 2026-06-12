@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Check a guest in</title>
+  <meta name="description" content="Type the guest's pass code and check them in. Works offline." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body class="op-body">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="op-header">
+    <div class="container op-header__in">
+      <a href="./vendor-dashboard.html" class="brand-lockup" style="min-width:0">
+        <img src="./assets/images/bookedja-mark-light.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-light.png" alt="BookedJA" class="brand-lockup__wordmark" />
+        <span class="op-tag">Operator</span>
+      </a>
+      <a href="./vendor-dashboard.html" style="font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center">← Back</a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="container container--narrow section--tight">
+    <span class="kicker">Guest arriving?</span>
+    <h1 class="mt-2" style="font-size:clamp(1.9rem,6vw,2.6rem)">Check their pass</h1>
+    <p class="lead mt-2">Ask the guest for the code on their pass — it starts with <strong>BJA</strong>. Type it below. No internet needed.</p>
+
+    <div class="card mt-4" style="border:2px solid var(--green)">
+      <label class="field">
+        <span>Pass code</span>
+        <input id="refInput" class="input input--huge" type="text" placeholder="BJA-XXXXXX" autocomplete="off" autocapitalize="characters" />
+      </label>
+      <button type="button" id="verifyBtn" class="btn btn--primary btn--big btn--block mt-3">Check the pass</button>
+      <button type="button" id="cameraBtn" class="btn btn--ghost btn--block mt-2">📷 Scan with camera instead</button>
+    </div>
+
+    <section id="result" class="mt-4" aria-live="polite"></section>
+
+    <div class="card card--flat mt-5">
+      <p class="bold">A good pass tells you:</p>
+      <ul class="trust-list mt-3">
+        <li><span class="tick">✓</span> The guest paid in full already</li>
+        <li><span class="tick">✓</span> The day, time and number of people match</li>
+        <li><span class="tick">✓</span> The booking is for <em>you</em>, not another operator</li>
+      </ul>
+    </div>
+  </main>
+
+  <nav class="bottomnav" aria-label="Operator">
+    <a href="./vendor-dashboard.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5"/></svg>
+      Today
+    </a>
+    <a href="./vendor-scan.html" class="is-active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V4h3M17 4h3v3M21 17v3h-3M7 20H4v-3M7 12h10"/></svg>
+      Check in
+    </a>
+    <a href="./vendor-dashboard.html#money">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="3"/></svg>
+      My money
+    </a>
+    <a href="./vendor-dashboard.html#help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5.1.7c0 1.7-2.6 2.3-2.6 3.5M12 17h.01"/></svg>
+      Help
+    </a>
+  </nav>
+
+<script>
+  function parsePayload(raw) {
+    if (!raw) return null;
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('BookedJA|')) return trimmed.split('|')[1]; // pasted QR data
+    return trimmed.toUpperCase();
+  }
+
+  function panel(kind, html) {
+    return `<div class="notice notice--${kind}" style="padding:1.5rem">${html}</div>`;
+  }
+
+  function showResult(ref) {
+    const out = document.getElementById('result');
+    if (!ref) {
+      out.innerHTML = panel('bad', '<p class="bold" style="font-size:1.2rem">Type the pass code first.</p>');
+      return;
+    }
+    const booking = getBooking(ref);
+    if (!booking) {
+      out.innerHTML = panel('bad', `
+        <p class="bold" style="font-size:1.4rem">✗ No booking found</p>
+        <p class="mt-2 muted">Nothing matches <strong>${safeText(ref)}</strong>. Check the letters with the guest and try again — or don't provide service yet.</p>`);
+      return;
+    }
+
+    const me = getCurrentVendorId();
+    const v = getVendor(booking.vendorId);
+    if (booking.vendorId !== me) {
+      out.innerHTML = panel('warn', `
+        <p class="bold" style="font-size:1.4rem">This pass is not for you</p>
+        <p class="mt-2 muted">It belongs to <strong>${safeText(v ? v.name : booking.vendorId)}</strong>${v ? ' (' + safeText(v.title) + ')' : ''}. The guest may be at the wrong meeting spot.</p>`);
+      return;
+    }
+    if (booking.status === 'cancelled') {
+      out.innerHTML = panel('bad', `
+        <p class="bold" style="font-size:1.4rem">✗ This booking was cancelled</p>
+        <p class="mt-2 muted">Don't provide service. If the guest disagrees, message BookedJA and we'll sort it out.</p>
+        <a class="btn btn--wa mt-3" target="_blank" rel="noopener" href="${waLink(PLATFORM_WHATSAPP, 'Hi BookedJA — a guest is showing cancelled pass ' + booking.id + '. Please help.')}">${waIcon()} WhatsApp BookedJA</a>`);
+      return;
+    }
+
+    out.innerHTML = panel('ok', `
+      <p class="bold" style="font-size:1.5rem;color:var(--green-deep)">✓ Good to go!</p>
+      <p class="bold mt-2" style="font-size:1.25rem">${safeText(booking.visitorName)}</p>
+      <div class="grid grid--3 mt-3" style="gap:.6rem">
+        <div class="fact" style="background:#fff"><p>Day</p><p>${fmtDate(booking.date)}</p></div>
+        <div class="fact" style="background:#fff"><p>Time</p><p>${safeText(booking.time)}</p></div>
+        <div class="fact" style="background:#fff"><p>People</p><p>${booking.guests}</p></div>
+      </div>
+      <p class="mt-3 small muted">Paid in full: <strong>${fmtUSD(booking.totalUSD)}</strong> · You collect <strong>${fmtJMD(bookingPayoutJMD(booking))}</strong> when it's done.</p>
+      ${booking.visitorNote ? `<p class="small muted mt-2"><strong>They said:</strong> ${safeText(booking.visitorNote)}</p>` : ''}
+      <div class="brow__actions mt-3">
+        ${booking.status === 'confirmed' ? `<button type="button" data-go="start" data-id="${booking.id}" class="btn btn--primary btn--big">Check ${safeText(firstName(booking.visitorName))} in</button>` : ''}
+        ${booking.status === 'in_progress' ? `<button type="button" data-go="complete" data-id="${booking.id}" class="btn btn--gold btn--big">All done — collect ${fmtJMD(bookingPayoutJMD(booking))}</button>` : ''}
+        ${booking.status === 'completed' ? '<span class="badge badge--neutral">Already completed ✓</span>' : ''}
+      </div>`);
+
+    document.querySelectorAll('[data-go]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        if (btn.dataset.go === 'start') { updateBooking(id, { status: 'in_progress' }); showToast('Guest checked in ✓'); }
+        else { updateBooking(id, { status: 'completed' }); showToast('Done! Money on the way 🎉'); }
+        showResult(id);
+      });
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('refInput');
+    document.getElementById('verifyBtn').addEventListener('click', () => showResult(parsePayload(input.value)));
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') showResult(parsePayload(input.value)); });
+    document.getElementById('cameraBtn').addEventListener('click', () => {
+      showToast('Camera scanning comes with the live app — type the code for now.');
+    });
+    const pre = getQuery('ref');
+    if (pre) { input.value = pre; showResult(parsePayload(pre)); }
+    else { input.focus(); }
+  });
+</script>
+</body>
+</html>

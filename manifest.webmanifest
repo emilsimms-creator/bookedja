@@ -1,0 +1,13 @@
+{
+  "name": "BookedJA — Jamaica, booked direct",
+  "short_name": "BookedJA",
+  "description": "Verified local tours, food and rides on Jamaica's South Coast. Works offline.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF8F2",
+  "theme_color": "#0E5435",
+  "icons": [
+    { "src": "./assets/images/bookedja-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

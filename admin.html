@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Verification console</title>
+  <meta name="description" content="Operations console for reviewing BookedJA host registrations, verification status, and exportable compliance data." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="op-header">
+    <div class="container op-header__in">
+      <a href="./index.html" class="brand-lockup" style="min-width:0">
+        <img src="./assets/images/bookedja-mark-light.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-light.png" alt="BookedJA" class="brand-lockup__wordmark" />
+        <span class="op-tag">Admin console</span>
+      </a>
+      <nav class="flex items-center gap-3">
+        <a href="./vendor-dashboard.html" style="font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center">Operator view</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="container section--tight">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <span class="kicker">Operations &amp; verification</span>
+        <h1 class="mt-2" style="font-size:clamp(1.7rem,4.5vw,2.3rem)">Verification queue</h1>
+        <p class="muted mt-1" style="max-width:42rem">Live host registrations. Oversight data shared with the Ministry of Tourism &amp; TPDCo.</p>
+      </div>
+      <div class="flex flex-wrap gap-2 items-center">
+        <label class="sr-only" for="regionFilter">Region</label>
+        <select id="regionFilter" class="input" style="width:auto;min-height:48px">
+          <option value="all">All parishes</option>
+          <option value="St. Elizabeth">St. Elizabeth</option>
+          <option value="Westmoreland">Westmoreland</option>
+        </select>
+        <label class="sr-only" for="statusFilter">Status</label>
+        <select id="statusFilter" class="input" style="width:auto;min-height:48px">
+          <option value="all">All statuses</option>
+          <option value="verified">Verified</option>
+          <option value="pending">Pending</option>
+          <option value="flagged">Flagged</option>
+        </select>
+        <button type="button" id="exportBtn" class="btn btn--dark btn--small">⬇ Export CSV</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <section class="grid mt-4" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem">
+      <div class="card"><p class="tiny bold muted" style="text-transform:uppercase;letter-spacing:.1em">Registered</p><p id="kpiRegistered" class="font-display bold" style="font-size:2.2rem">0</p></div>
+      <div class="card"><p class="tiny bold muted" style="text-transform:uppercase;letter-spacing:.1em">Pending</p><p id="kpiPending" class="font-display bold" style="font-size:2.2rem;color:#7A5E0D">0</p></div>
+      <div class="card"><p class="tiny bold muted" style="text-transform:uppercase;letter-spacing:.1em">Verified</p><p id="kpiVerified" class="font-display bold" style="font-size:2.2rem;color:var(--green-deep)">0</p></div>
+      <div class="card"><p class="tiny bold muted" style="text-transform:uppercase;letter-spacing:.1em">Flagged</p><p id="kpiFlagged" class="font-display bold" style="font-size:2.2rem;color:var(--coral)">0</p></div>
+    </section>
+
+    <!-- Charts -->
+    <section class="grid grid--2 mt-3">
+      <div class="card">
+        <p class="bold">Verification status</p>
+        <div id="statusChart" class="mt-3"></div>
+        <div id="statusLegend" class="mt-3 flex flex-wrap gap-4 small"></div>
+      </div>
+      <div class="card">
+        <p class="bold">Registrations by category</p>
+        <div id="categoryChart" class="mt-2"></div>
+      </div>
+    </section>
+
+    <!-- Queue -->
+    <section class="mt-3">
+      <div class="table-wrap">
+        <div class="flex items-center justify-between" style="padding:1rem 1.25rem;border-bottom:1px solid var(--line-soft)">
+          <p class="bold">Queue</p>
+          <p class="small muted"><span id="queueCount">0</span> shown</p>
+        </div>
+        <table class="data">
+          <thead>
+            <tr>
+              <th scope="col">Host &amp; listing</th>
+              <th scope="col">Category</th>
+              <th scope="col">Parish</th>
+              <th scope="col">Price</th>
+              <th scope="col">Status</th>
+              <th scope="col" style="text-align:right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="queueBody"></tbody>
+        </table>
+        <p id="queueEmpty" class="hidden center muted small" style="padding:2.5rem 1.5rem">No registrations match these filters. New sign-ups from <a href="./become-a-host.html">Join as an operator</a> appear here automatically.</p>
+      </div>
+    </section>
+
+    <p class="tiny faded mt-4" style="font-style:italic">Demo console — local data only; no live notifications are sent. Designed to support TPDCo Destination Assurance and Team Jamaica verification standards.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA · Verification console</span>
+        <span>Oversight data for Ministry of Tourism · TPDCo</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  var state = { region: 'all', status: 'all' };
+
+  function reviewOf(v) { return v.reviewStatus || 'pending'; }
+  function parishOf(v) { return /bluefields|whitehouse|negril|westmoreland|savanna/i.test(v.town || '') ? 'Westmoreland' : 'St. Elizabeth'; }
+  function newestFirst() { return getCustomVendors().slice().reverse(); }
+  function csv(s) { s = String(s == null ? '' : s); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+
+  function seedHostsIfEmpty() {
+    if (getCustomVendors().length) return;
+    var def = (typeof CATEGORY_DEFAULTS !== 'undefined') ? CATEGORY_DEFAULTS : {};
+    var samples = [
+      { name: 'Marva Henry', cat: 'Food', title: 'Whitehouse seafood supper', town: 'Whitehouse', price: 60 },
+      { name: 'Dwayne Service', cat: 'Transport', title: 'South Coast airport runs', town: 'Black River', price: 130 },
+      { name: 'Pearl Gordon', cat: 'Stay', title: 'Calabash Bay guesthouse', town: 'Treasure Beach', price: 95 }
+    ];
+    var list = samples.map(function (s, i) {
+      var d = def[s.cat] || def.Tour || {};
+      return {
+        id: 'host-seed-' + i, custom: true, status: 'draft', reviewStatus: 'pending', hostId: null,
+        category: s.cat, name: s.name, title: s.title, town: s.town, durationHrs: d.durationHrs || 2,
+        pricePerPersonUSD: s.price, rating: 0, trips: 0, tier: 'New', image: d.image || './assets/images/green-hills.jpg',
+        short: '', about: '', included: [], bring: [], itinerary: [], times: d.times || ['on request'],
+        cancellation: 'To be set during verification.',
+        verification: { identity: false, jtb: false, insured: false, tpdco: false, firstAid: false },
+        reviews: [], host: { name: s.name, phone: '', email: '' }, createdAt: new Date(Date.now() - i * 3600e3).toISOString()
+      };
+    });
+    saveCustomVendors(list);
+  }
+
+  function statusPill(s) {
+    var m = {
+      verified: ['Verified', 'badge--ok'],
+      pending: ['Pending', 'badge--warn'],
+      flagged: ['Flagged', 'badge--bad']
+    }[s] || ['—', 'badge--neutral'];
+    return '<span class="badge ' + m[1] + '">' + m[0] + '</span>';
+  }
+
+  function statusChart(c) {
+    var total = c.verified + c.pending + c.flagged || 1, W = 100;
+    var v = c.verified / total * W, p = c.pending / total * W;
+    return '<svg viewBox="0 0 100 14" preserveAspectRatio="none" style="width:100%;height:18px;border-radius:9px;overflow:hidden">'
+      + '<rect x="0" y="0" width="' + v + '" height="14" fill="#1B7A4B"/>'
+      + '<rect x="' + v + '" y="0" width="' + p + '" height="14" fill="#E9B824"/>'
+      + '<rect x="' + (v + p) + '" y="0" width="' + (W - v - p) + '" height="14" fill="#C75136"/></svg>';
+  }
+  function legend(c) {
+    function item(color, label, n) { return '<span style="display:inline-flex;align-items:center;gap:.4rem"><span style="width:11px;height:11px;border-radius:3px;background:' + color + '"></span><strong>' + n + '</strong><span class="muted">' + label + '</span></span>'; }
+    return item('#1B7A4B', 'Verified', c.verified) + item('#E9B824', 'Pending', c.pending) + item('#C75136', 'Flagged', c.flagged);
+  }
+  function categoryChart(map) {
+    var cats = [['Tour', '#1B7A4B'], ['Food', '#C75136'], ['Transport', '#2C7DA0'], ['Stay', '#E9B824']];
+    var max = Math.max.apply(null, [1].concat(cats.map(function (c) { return map[c[0]] || 0; })));
+    var bw = 24, gap = 16, x = 12, base = 80, bars = '';
+    cats.forEach(function (c, i) {
+      var val = map[c[0]] || 0, h = (val / max) * 60, bx = x + i * (bw + gap);
+      bars += '<rect x="' + bx + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="4" fill="' + c[1] + '"/>';
+      bars += '<text x="' + (bx + bw / 2) + '" y="' + (base - h - 4) + '" text-anchor="middle" font-size="9" font-weight="700" fill="#1B2A21">' + val + '</text>';
+      bars += '<text x="' + (bx + bw / 2) + '" y="94" text-anchor="middle" font-size="8" fill="#49594F">' + c[0] + '</text>';
+    });
+    return '<svg viewBox="0 0 172 100" style="width:100%;max-width:280px;height:auto">' + bars + '</svg>';
+  }
+
+  function rowHTML(v) {
+    var s = reviewOf(v);
+    var hostName = safeText(v.host && v.host.name || v.name);
+    var title = safeText(v.title);
+    var actions = '<div class="flex gap-2" style="justify-content:flex-end">'
+      + '<button type="button" data-approve="' + v.id + '" class="btn btn--primary btn--small">✓ Approve</button>'
+      + '<button type="button" data-flag="' + v.id + '" class="btn btn--danger-ghost btn--small">⚑ Flag</button>'
+      + '</div>';
+    return '<tr data-row="' + v.id + '">'
+      + '<td><p class="bold">' + hostName + '</p><p class="small muted">' + title + '</p></td>'
+      + '<td>' + safeText(v.category) + '</td>'
+      + '<td>' + safeText(parishOf(v)) + '</td>'
+      + '<td>US$' + v.pricePerPersonUSD + '</td>'
+      + '<td>' + statusPill(s) + '</td>'
+      + '<td style="text-align:right">' + actions + '</td></tr>';
+  }
+
+  function filtered() {
+    return newestFirst().filter(function (v) {
+      if (state.region !== 'all' && parishOf(v) !== state.region) return false;
+      if (state.status !== 'all' && reviewOf(v) !== state.status) return false;
+      return true;
+    });
+  }
+
+  function renderKPIs() {
+    var all = newestFirst();
+    document.getElementById('kpiRegistered').textContent = all.length;
+    document.getElementById('kpiPending').textContent = all.filter(function (v) { return reviewOf(v) === 'pending'; }).length;
+    document.getElementById('kpiVerified').textContent = all.filter(function (v) { return reviewOf(v) === 'verified'; }).length;
+    document.getElementById('kpiFlagged').textContent = all.filter(function (v) { return reviewOf(v) === 'flagged'; }).length;
+  }
+  function renderCharts() {
+    var all = newestFirst();
+    var c = {
+      verified: all.filter(function (v) { return reviewOf(v) === 'verified'; }).length,
+      pending: all.filter(function (v) { return reviewOf(v) === 'pending'; }).length,
+      flagged: all.filter(function (v) { return reviewOf(v) === 'flagged'; }).length
+    };
+    document.getElementById('statusChart').innerHTML = statusChart(c);
+    document.getElementById('statusLegend').innerHTML = legend(c);
+    var map = {};
+    all.forEach(function (v) { map[v.category] = (map[v.category] || 0) + 1; });
+    document.getElementById('categoryChart').innerHTML = categoryChart(map);
+  }
+  function renderQueue() {
+    var rows = filtered();
+    document.getElementById('queueBody').innerHTML = rows.map(rowHTML).join('');
+    document.getElementById('queueCount').textContent = rows.length;
+    document.getElementById('queueEmpty').classList.toggle('hidden', rows.length !== 0);
+  }
+  function renderAll() { renderKPIs(); renderCharts(); renderQueue(); }
+
+  function applyReview(id, patch, msg) {
+    updateCustomVendor(id, patch);
+    renderAll();
+    showToast(msg);
+  }
+
+  function exportReport() {
+    var rows = filtered();
+    var head = ['Host', 'Listing', 'Category', 'Parish', 'Price (US$)', 'Status'];
+    var lines = [head.join(',')].concat(rows.map(function (v) {
+      return [csv(v.host && v.host.name || v.name), csv(v.title), v.category, parishOf(v), v.pricePerPersonUSD, reviewOf(v)].join(',');
+    }));
+    var blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bookedja-verification-queue.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    showToast('Report exported (' + rows.length + ' rows)');
+  }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    seedHostsIfEmpty();
+
+    document.getElementById('regionFilter').addEventListener('change', function (e) { state.region = e.target.value; renderQueue(); });
+    document.getElementById('statusFilter').addEventListener('change', function (e) { state.status = e.target.value; renderQueue(); });
+    document.getElementById('exportBtn').addEventListener('click', exportReport);
+
+    document.getElementById('queueBody').addEventListener('click', function (e) {
+      var ap = e.target.closest('[data-approve]');
+      var fl = e.target.closest('[data-flag]');
+      if (ap) applyReview(ap.getAttribute('data-approve'), { reviewStatus: 'verified', status: 'live', tier: 'Verified', verification: { identity: true, jtb: true, insured: true, tpdco: true, firstAid: true } }, 'Host approved — verified and live ✓');
+      else if (fl) applyReview(fl.getAttribute('data-flag'), { reviewStatus: 'flagged' }, 'Host flagged for review');
+    });
+
+    renderAll();
+  });
+</script>
+</body>
+</html>

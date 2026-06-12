@@ -1,0 +1,12 @@
+# Internal pitch-prep documents — never publish these
+SPEAKING_NOTES_BookedJA.md
+DEMO_SCRIPT_BookedJA.md
+LAUNCH_READINESS.md
+
+# Local tooling & exports
+.claude/
+*.csv
+
+# OS noise
+Thumbs.db
+desktop.ini

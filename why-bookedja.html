@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Why it works: capabilities &amp; impact at a glance</title>
+  <meta name="description" content="How BookedJA bridges visitors and rural Jamaican operators — verified trust, protected payment, WhatsApp-native, offline-ready — and why that keeps tourism dollars in local hands." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <style>
+    /* ---- page-specific infographic styles ---- */
+    .ig-problem { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); }
+    .ig-problem .card { border-left:5px solid var(--coral); }
+
+    .ig-idea { text-align:center; }
+    .ig-idea .big { font-family:var(--font-display); font-weight:600; line-height:1.18; font-size:clamp(1.6rem,4.2vw,2.6rem); letter-spacing:-.01em; }
+    .ig-idea .big .hl { color:var(--green-deep); border-bottom:4px solid var(--gold); }
+
+    /* The bridge */
+    .ig-bridge { display:grid; gap:1.1rem; align-items:stretch; grid-template-columns:1fr; }
+    @media (min-width:920px){ .ig-bridge{ grid-template-columns:1fr 1.4fr 1fr; } }
+    .ig-shore { display:flex; flex-direction:column; gap:.5rem; }
+    .ig-shore .who { display:flex; align-items:center; gap:.7rem; }
+    .ig-shore .who-ic { width:54px;height:54px;border-radius:16px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center; }
+    .ig-shore--v .who-ic { background:var(--gold-tint); color:#7A5E0D; }
+    .ig-shore--o .who-ic { background:var(--green-tint); color:var(--green-deep); }
+    .ig-shore h3 { font-size:1.15rem; }
+    .ig-shore .want { font-style:italic; color:var(--soft); font-size:.98rem; }
+    .ig-shore ul { list-style:none; margin:.4rem 0 0; padding:0; display:grid; gap:.45rem; }
+    .ig-shore li { display:flex; gap:.5rem; align-items:flex-start; font-size:.96rem; font-weight:500; }
+    .ig-shore li .d { flex-shrink:0; width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;margin-top:.1rem; }
+    .ig-shore--v li .d { background:var(--gold); color:var(--ink); }
+    .ig-shore--o li .d { background:var(--green); }
+
+    .ig-engine { background:var(--green-deep); color:#fff; border-radius:var(--radius); padding:clamp(1.2rem,3vw,1.7rem); box-shadow:var(--shadow-lift); }
+    .ig-engine .tag { color:var(--gold); }
+    .ig-engine h3 { color:#fff; font-size:1.3rem; }
+    .ig-caps { display:grid; gap:.6rem; margin-top:.9rem; }
+    .ig-cap { display:flex; gap:.7rem; align-items:flex-start; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:.7rem .85rem; }
+    .ig-cap .ic { flex-shrink:0; width:34px;height:34px;border-radius:10px;background:var(--gold);color:var(--ink);display:inline-flex;align-items:center;justify-content:center; }
+    .ig-cap b { display:block; font-size:.98rem; }
+    .ig-cap span { display:block; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.4; }
+
+    .ig-arrow { display:flex; align-items:center; justify-content:center; color:var(--green); }
+    @media (max-width:919px){ .ig-arrow svg{ transform:rotate(90deg); } }
+
+    /* money flow strip */
+    .ig-flow { display:grid; gap:.7rem; grid-template-columns:1fr; }
+    @media (min-width:760px){ .ig-flow{ grid-template-columns:1fr auto 1fr auto 1fr; align-items:center; } }
+    .ig-flow .node { background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:.9rem 1rem; text-align:center; }
+    .ig-flow .node b { font-family:var(--font-display); font-size:1.15rem; }
+    .ig-flow .node.win { border-color:var(--green); background:var(--green-tint); }
+    .ig-flow .chev { display:flex; align-items:center; justify-content:center; color:var(--green); font-weight:800; }
+    @media (max-width:759px){ .ig-flow .chev svg{ transform:rotate(90deg); } }
+
+    /* benefit columns */
+    .ig-benefit h3 { display:flex; align-items:center; gap:.6rem; font-size:1.25rem; }
+    .ig-benefit .pin { width:40px;height:40px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0; }
+
+    /* national impact */
+    .ig-nat { display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr)); }
+    .ig-nat .stat { text-align:center; padding:1.2rem 1rem; }
+    .ig-nat .num { font-family:var(--font-display); font-weight:600; font-size:clamp(1.8rem,4vw,2.4rem); color:var(--green-deep); line-height:1; }
+    .ig-nat .lbl { color:var(--soft); font-size:.92rem; margin-top:.4rem; }
+
+    @media print {
+      .site-header, .site-footer, .no-print { display:none !important; }
+      body { background:#fff; }
+      .section { padding-block:1.1rem; }
+      .ig-engine { box-shadow:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .ig-engine, .card[style*="green-deep"] { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      section { break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header no-print">
+    <div class="container site-header__in">
+      <a href="./index.html" class="brand-lockup" aria-label="BookedJA home">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="site-nav" id="siteNav" aria-label="Main">
+        <a href="./experiences.html">Things to do</a>
+        <a href="./about.html">About</a>
+        <a href="./why-bookedja.html" aria-current="page">Why it works</a>
+        <a href="./ministry.html">Ministry</a>
+      </nav>
+      <button type="button" onclick="window.print()" class="btn btn--ghost btn--small header-cta">Save as PDF</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- TITLE -->
+    <section class="section section--tight">
+      <div class="container">
+        <span class="kicker">Capabilities &amp; impact at a glance</span>
+        <h1 class="mt-2">Why BookedJA is built to win.</h1>
+        <p class="lead mt-3" style="max-width:48rem">One simple idea, executed to a world-class standard: make trust <em>visible</em>, and visitor money flows straight to the rural Jamaicans who earn it — instead of leaking offshore. Here's the whole logic on one page.</p>
+      </div>
+    </section>
+
+    <!-- 1 · THE PROBLEM -->
+    <section class="section--tight">
+      <div class="container">
+        <span class="kicker" style="color:var(--coral)">The problem</span>
+        <h2 class="mt-2">Two gaps cost Jamaica every day.</h2>
+        <div class="ig-problem mt-4">
+          <div class="card">
+            <h3 style="font-size:1.15rem">The money leaks out</h3>
+            <p class="muted mt-2">An estimated <strong>70–80¢ of every tourist dollar</strong> leaves the Caribbean — to foreign-owned operators and offshore booking platforms that charge 20–40% and bank it abroad.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-size:1.15rem">The trust gap</h3>
+            <p class="muted mt-2">The best rural hosts are <strong>invisible online</strong> — no website, just a phone and a reputation. And visitors are nervous: <em>Is this safe? Is this the real price? Will they show up?</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · THE IDEA -->
+    <section class="section">
+      <div class="container container--mid ig-idea">
+        <span class="kicker">The idea</span>
+        <p class="big mt-3">Verify the host in person, and a stranger becomes <span class="hl">someone you can pay with confidence</span> — so the money goes <span class="hl">direct, not offshore.</span></p>
+      </div>
+    </section>
+
+    <!-- 3 · THE BRIDGE (centerpiece) -->
+    <section class="section" style="background:var(--green-tint)">
+      <div class="container">
+        <span class="kicker">How it works</span>
+        <h2 class="mt-2">The BookedJA bridge</h2>
+        <p class="muted mt-2" style="max-width:42rem">One verified host connects two people who'd otherwise never safely meet — the visitor who wants the real Jamaica, and the rural operator who wants a fair, direct living.</p>
+
+        <div class="ig-bridge mt-5">
+          <!-- visitor shore -->
+          <div class="ig-shore ig-shore--v">
+            <div class="who">
+              <span class="who-ic">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+              </span>
+              <div><h3>The visitor</h3><p class="want">"I want the real Jamaica — without the worry."</p></div>
+            </div>
+            <ul>
+              <li><span class="d">✓</span> Sees only verified, real local hosts</li>
+              <li><span class="d">✓</span> Pays a fixed price — no haggling</li>
+              <li><span class="d">✓</span> Money protected until it's done</li>
+              <li><span class="d">✓</span> Carries a pass that works offline</li>
+            </ul>
+          </div>
+
+          <!-- arrow -->
+          <div class="ig-arrow" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+
+          <!-- engine -->
+          <div class="ig-engine">
+            <span class="kicker tag">The trust engine</span>
+            <h3 class="mt-1">What makes it world-class</h3>
+            <div class="ig-caps">
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5 3.8 9.4 9 11 5.2-1.6 9-6 9-11V5l-9-4Zm-1 15-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7Z"/></svg></span>
+                <div><b>Verified in person</b><span>Every host's ID, licence &amp; insurance checked to national tourism standards.</span></div>
+              </div>
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5 3.8 9.4 9 11 5.2-1.6 9-6 9-11V5l-9-4Z" opacity=".25"/><path d="M12 6a3 3 0 0 0-3 3v1H8v6h8v-6h-1V9a3 3 0 0 0-3-3Zm1.5 4h-3V9a1.5 1.5 0 0 1 3 0v1Z"/></svg></span>
+                <div><b>Fixed price + escrow</b><span>The price is the price. We hold the money safely until the experience is done.</span></div>
+              </div>
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.5 14.2c-.3.7-1.5 1.3-2 1.4-.6.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .5 0 .7.5l1 2.2c0 .2.1.4 0 .6l-.3.6-.5.6c-.1.1-.3.3-.1.6.2.3.9 1.5 1.9 2.4.9.7 1.5 1 1.8 1.1.2.1.4.1.6-.1l.9-1.2c.2-.3.4-.2.7-.1l2 1c.3.2.5.3.5.4.1.1.1.6-.2 1.3Z"/></svg></span>
+                <div><b>WhatsApp-native</b><span>Bookings &amp; messages on the one app rural Jamaica already lives on.</span></div>
+              </div>
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.5 10 17l9-10"/></svg></span>
+                <div><b>Works offline</b><span>Passes, bookings &amp; check-in keep working where the signal doesn't.</span></div>
+              </div>
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8v8H3V3Zm2 2v4h4V5H5Zm8-2h8v8h-8V3Zm2 2v4h4V5h-4ZM3 13h8v8H3v-8Zm2 2v4h4v-4H5Zm10 0h2v2h-2v-2Zm4 0h2v2h-2v-2Zm-4 4h2v2h-2v-2Zm4 0h2v2h-2v-2Z"/></svg></span>
+                <div><b>Instant QR pass</b><span>A tamper-resistant digital pass; one scan confirms the guest on arrival.</span></div>
+              </div>
+              <div class="ig-cap">
+                <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v12H3V6Zm2 2v8h14V8H5Zm7 1a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></svg></span>
+                <div><b>Paid direct — 82%</b><span>Operators keep 82%, in Jamaican dollars, to their bank or mobile wallet.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- arrow -->
+          <div class="ig-arrow" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+
+          <!-- operator shore -->
+          <div class="ig-shore ig-shore--o">
+            <div class="who">
+              <span class="who-ic">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+              </span>
+              <div><h3>The rural operator</h3><p class="want">"I want a fair, direct living — no website needed."</p></div>
+            </div>
+            <ul>
+              <li><span class="d">✓</span> Gets discovered by the world from home</li>
+              <li><span class="d">✓</span> Runs the whole thing on WhatsApp</li>
+              <li><span class="d">✓</span> Paid 82% direct, in J$</li>
+              <li><span class="d">✓</span> Builds a verified reputation that compounds</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- money flow -->
+        <div class="ig-flow mt-5">
+          <div class="node"><span class="muted small">Visitor pays</span><br><b>US$90</b></div>
+          <div class="chev" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          <div class="node"><span class="muted small">BookedJA holds &amp; protects</span><br><b>Escrow</b></div>
+          <div class="chev" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></div>
+          <div class="node win"><span class="muted small">Operator earns (82%)</span><br><b id="payout">J$11,660</b></div>
+        </div>
+        <p class="tiny faded center mt-2">Example: US$45 × 2 guests. BookedJA's 18% covers payment protection, verification &amp; the marketing that brings the visitor — and stays onshore.</p>
+      </div>
+    </section>
+
+    <!-- 4 · BENEFITS, BOTH SIDES -->
+    <section class="section">
+      <div class="container">
+        <span class="kicker">Who wins</span>
+        <h2 class="mt-2">A win the visitor feels — and a win rural Jamaica banks.</h2>
+        <div class="grid grid--2 mt-5">
+          <div class="ig-benefit card">
+            <h3><span class="pin" style="background:var(--gold-tint);color:#7A5E0D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 6 3.5 9S14.5 18.5 12 21C9.5 18.5 8.5 15 8.5 12S9.5 5.5 12 3Z"/></svg></span> For visitors to Jamaica</h3>
+            <ul class="trust-list mt-3">
+              <li><span class="tick">✓</span> The authentic Jamaica — vetted, not guesswork</li>
+              <li><span class="tick">✓</span> Peace of mind: every host verified in person</li>
+              <li><span class="tick">✓</span> No haggling, no surprises — the price is the price</li>
+              <li><span class="tick">✓</span> Money protected until the experience is done</li>
+              <li><span class="tick">✓</span> One tap to your host on WhatsApp</li>
+              <li><span class="tick">✓</span> A pass that works even with no signal</li>
+            </ul>
+          </div>
+          <div class="ig-benefit card card--tint">
+            <h3><span class="pin" style="background:var(--green);color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10.5V20h12v-9.5"/><path d="M10 20v-5h4v5"/></svg></span> For rural Jamaicans</h3>
+            <ul class="trust-list mt-3">
+              <li><span class="tick">✓</span> Dignified income from tourism — earned directly</li>
+              <li><span class="tick">✓</span> No website, no tech skills — just WhatsApp</li>
+              <li><span class="tick">✓</span> Paid 82%, in J$, to bank or mobile wallet</li>
+              <li><span class="tick">✓</span> Discovered by the world without leaving home</li>
+              <li><span class="tick">✓</span> A verified reputation that compounds into "Top Local"</li>
+              <li><span class="tick">✓</span> Works on any phone, even with weak signal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · NATIONAL IMPACT -->
+    <section class="section" style="background:var(--green-deep); color:#fff">
+      <div class="container">
+        <span class="kicker" style="color:var(--gold)">Why it matters beyond the booking</span>
+        <h2 class="mt-2" style="color:#fff">Every booking is a small act of nation-building.</h2>
+        <div class="ig-nat mt-5">
+          <div class="card stat" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)">
+            <p class="num" style="color:var(--gold)">82%</p>
+            <p class="lbl" style="color:rgba(255,255,255,.8)">of every booking reaches the local operator</p>
+          </div>
+          <div class="card stat" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)">
+            <p class="num" style="color:var(--gold)">100%</p>
+            <p class="lbl" style="color:rgba(255,255,255,.8)">onshore — fee &amp; payment stay in Jamaica, not an offshore OTA</p>
+          </div>
+          <div class="card stat" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)">
+            <p class="num" style="color:var(--gold)">5 of 15</p>
+            <p class="lbl" style="color:rgba(255,255,255,.8)">Vision 2030 National Outcomes advanced</p>
+          </div>
+          <div class="card stat" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)">
+            <p class="num" style="color:var(--gold)">+formal</p>
+            <p class="lbl" style="color:rgba(255,255,255,.8)">informal operators become verified, bankable &amp; counted</p>
+          </div>
+        </div>
+        <p class="mt-5" style="color:rgba(255,255,255,.85);max-width:46rem;font-size:1.08rem">
+          Foreign exchange retained at source. Micro-operators formalised into the tax base. Real economic data for the State. A Jamaican-owned alternative to foreign platforms — the same supply-side proof ALEX delivered for farmers, now built for the visitor economy.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6 · THE VIRTUOUS CYCLE -->
+    <section class="section">
+      <div class="container container--mid center">
+        <span class="kicker">And it compounds</span>
+        <h2 class="mt-2">A cycle that gets stronger every trip.</h2>
+        <p class="lead mt-3">More verified hosts → more trust → more visitors book direct → more rural income → more operators want in. Trust is the product, and it grows itself.</p>
+        <div class="flex flex-wrap gap-3 mt-4" style="justify-content:center">
+          <a href="./experiences.html" class="btn btn--gold btn--big no-print">See the live app</a>
+          <a href="./ministry.html" class="btn btn--ghost no-print">Read the Ministry brief</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA · Made in St. Elizabeth, Jamaica</span>
+        <span>Prototype — illustrative figures, no real payments processed</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // keep the payout example exactly in sync with the platform fee constants
+    try {
+      const payout = 45 * 2 * USD_TO_JMD * OPERATOR_SHARE;
+      document.getElementById('payout').textContent = fmtJMD(payout);
+    } catch (e) { /* constants load with app.js; fall back to static text */ }
+  });
+</script>
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</body>
+</html>

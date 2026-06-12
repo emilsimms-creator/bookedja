@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Your pass</title>
+  <meta name="description" content="Your BookedJA pass with QR code. Works offline — just show it on arrival." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+  <script defer src="./assets/qrcode.min.js"></script>
+</head>
+<body class="pass-bg">
+  <a class="skip-link" href="#root">Skip to main content</a>
+
+  <header class="container" style="max-width:30rem; padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; color:rgba(255,255,255,.9)">
+    <a href="./my-bookings.html" style="display:inline-flex;align-items:center;gap:.4rem;min-height:44px;text-decoration:none;color:inherit;font-weight:600">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      My bookings
+    </a>
+    <span class="brand-lockup brand-lockup--sm">
+      <img src="./assets/images/bookedja-mark-light.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-light.png" alt="BookedJA" class="brand-lockup__wordmark" />
+    </span>
+  </header>
+
+  <main id="root" tabindex="-1" class="container" style="max-width:30rem; padding-top:1.5rem; padding-bottom:4rem">
+    <p class="center" style="padding:4rem 0; color:rgba(255,255,255,.7)">Loading your pass…</p>
+  </main>
+
+<script>
+  function statusPill(s) {
+    const map = {
+      confirmed:   { label: '✓ Already Booked', cls: 'badge--ok' },
+      in_progress: { label: 'Happening now', cls: 'badge--warn' },
+      completed:   { label: 'Completed', cls: 'badge--neutral' },
+      cancelled:   { label: 'Cancelled', cls: 'badge--bad' }
+    };
+    const m = map[s] || map.confirmed;
+    return `<span class="badge ${m.cls}">${m.label}</span>`;
+  }
+
+  function rideBlockInner(booking, vendor) {
+    const order = ['scheduled', 'enroute', 'arrived'];
+    const labels = { scheduled: 'Confirmed', enroute: 'On the way', arrived: 'Arrived' };
+    const rs = booking.rideStatus || 'scheduled';
+    const cur = order.indexOf(rs);
+    const driverName = safeText(vendor.name);
+    const vehicle = safeText(vendor.vehicle || 'vehicle');
+    const plate = safeText(vendor.plate || '');
+    const strip = order.map((k, i) =>
+      `<span class="badge ${i <= cur ? 'badge--ok' : 'badge--neutral'}" style="font-size:.7rem">${labels[k]}</span>${i < 2 ? '<span class="faded">›</span>' : ''}`
+    ).join('');
+
+    let headline;
+    if (rs === 'arrived') {
+      headline = `<p class="bold" style="font-size:1.2rem;color:var(--green-deep)">${driverName} has arrived</p>
+        <p class="small muted mt-1">Look for the ${vehicle}${plate ? ' · plate ' + plate : ''}.</p>`;
+    } else if (rs === 'enroute') {
+      const mins = booking.etaAt ? Math.max(0, Math.round((booking.etaAt - Date.now()) / 60000)) : null;
+      const clock = booking.etaAt ? new Date(booking.etaAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : booking.time;
+      headline = `<p class="bold" style="font-size:1.2rem;color:var(--green-deep)">${driverName} is on the way</p>
+        <p class="small mt-1">Arriving about <strong>${clock}</strong>${mins !== null ? ' (~' + (mins <= 0 ? 'any moment' : mins + ' min') + ')' : ''}</p>`;
+    } else {
+      headline = `<p class="bold" style="font-size:1.1rem">Pickup confirmed · ${booking.time}</p>
+        <p class="small muted mt-1">${driverName} will update you here when on the way.</p>`;
+    }
+
+    return `
+      <div class="flex items-center justify-between gap-2 flex-wrap">
+        <p class="tiny bold" style="text-transform:uppercase;letter-spacing:.1em;color:var(--soft)">Your ride</p>
+        <div class="flex items-center gap-2">${strip}</div>
+      </div>
+      <div class="mt-2">${headline}</div>
+      <div class="grid grid--3 mt-3" style="gap:.6rem">
+        <div class="fact"><p>Vehicle</p><p>${vehicle || '—'}</p></div>
+        <div class="fact"><p>Plate</p><p>${plate || '—'}</p></div>
+        <div class="fact"><p>Driver</p><p>${driverName}</p></div>
+      </div>`;
+  }
+
+  function render(booking, vendor, isNew) {
+    const isT = vendor && vendor.category === 'Transport';
+    const guestName = safeText(booking.visitorName);
+    const vendorName = safeText(vendor.name);
+    const vendorTitle = safeText(vendor.title);
+    const vendorTown = safeText(vendor.town);
+
+    const celebrate = isNew ? `
+      <div class="pop notice notice--ok mb-3 center">
+        <p class="bold" style="font-size:1.15rem">🎉 You're booked!</p>
+        <p class="small muted mt-1">This pass is your ticket. It works with no internet — just show it to ${vendorName} when you arrive.</p>
+      </div>` : '';
+
+    document.getElementById('root').innerHTML = `
+      ${celebrate}
+      <h1 class="sr-only">BookedJA pass for ${vendorTitle}</h1>
+
+      <div class="ticket pop">
+        <div style="padding:1.4rem 1.4rem 1rem" class="flex items-start justify-between gap-3">
+          <div>
+            <p class="tiny bold" style="text-transform:uppercase;letter-spacing:.12em;color:var(--soft)">Booking ref</p>
+            <p class="font-display bold" style="font-size:1.7rem;letter-spacing:.04em">${safeText(booking.id)}</p>
+          </div>
+          ${statusPill(booking.status)}
+        </div>
+
+        <div style="margin:0 1.4rem;border-radius:16px;overflow:clip;position:relative;aspect-ratio:16/6">
+          <img src="${vendor.image}" alt="" style="width:100%;height:100%;object-fit:cover" />
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,30,21,.05),rgba(14,30,21,.65))"></div>
+          <div style="position:absolute;left:1rem;right:1rem;bottom:.7rem;color:#fff">
+            <p class="tiny" style="opacity:.9">${vendorTown}${vendor.durationHrs ? ' · ' + vendor.durationHrs + ' hrs' : ''}</p>
+            <p class="font-display bold" style="font-size:1.15rem;line-height:1.2">${vendorTitle}</p>
+          </div>
+        </div>
+
+        <div style="padding:1rem 1.4rem 0" class="flex items-center gap-3">
+          <div style="width:42px;height:42px;border-radius:999px;background:linear-gradient(135deg,var(--green),var(--gold));flex-shrink:0"></div>
+          <div style="flex:1">
+            <p class="bold">${vendorName}</p>
+            <p class="tiny muted">${vendor.rating > 0 ? '★ ' + vendor.rating.toFixed(1) + ' · ' + vendor.trips + ' trips' : 'New on BookedJA'}</p>
+          </div>
+          <a id="waHost" href="#" target="_blank" rel="noopener" class="btn btn--wa btn--small">${waIcon('wa-ico')} Message</a>
+        </div>
+
+        ${isT ? `<div style="padding:0 1.4rem;margin-top:1rem"><div id="rideStatus" class="card card--tint card--flat" style="padding:1rem">${rideBlockInner(booking, vendor)}</div></div>` : ''}
+
+        <div class="ticket-edge" style="margin:1.2rem 1.4rem;border-top:2px dashed var(--line)"></div>
+
+        <div style="padding:0 1.4rem" class="grid grid--2" >
+          <div class="fact"><p>Day</p><p>${fmtDate(booking.date)}</p></div>
+          <div class="fact"><p>Time</p><p>${safeText(booking.time)}</p></div>
+          <div class="fact"><p>People</p><p>${booking.guests} ${booking.guests > 1 ? 'people' : 'person'}</p></div>
+          <div class="fact"><p>Paid</p><p>${fmtUSD(booking.totalUSD)} <span class="faded" style="font-weight:500">· ${fmtJMD(booking.totalJMD)}</span></p></div>
+        </div>
+
+        <div style="padding:1.2rem 1.4rem 0">
+          <div style="background:var(--ink);color:#fff;border-radius:18px;padding:1.2rem" class="flex items-center gap-4 flex-wrap">
+            <div id="qr" style="width:150px;height:150px;border-radius:12px;overflow:clip;background:#fff;flex-shrink:0" aria-label="Booking QR code"></div>
+            <div style="flex:1;min-width:9rem">
+              <p class="tiny bold" style="text-transform:uppercase;letter-spacing:.12em;opacity:.65">Show on arrival</p>
+              <p class="bold mt-1" style="font-size:1.05rem;line-height:1.35">${vendorName} checks this to confirm your booking.</p>
+              <p class="tiny mt-2" style="opacity:.65">✓ Works with no internet</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:1.2rem 1.4rem 1.4rem">
+          <p class="tiny bold" style="text-transform:uppercase;letter-spacing:.12em;color:var(--soft)">Booked by</p>
+          <p class="bold mt-1" style="font-size:1.1rem">${guestName}</p>
+          <p class="tiny muted">${safeText(booking.visitorPhone)} · ${safeText(booking.visitorEmail)}</p>
+          ${booking.visitorNote ? `<p class="small muted mt-2"><strong>Note for host:</strong> ${safeText(booking.visitorNote)}</p>` : ''}
+        </div>
+      </div>
+
+      <div class="grid grid--3 mt-3" style="gap:.7rem">
+        <button type="button" id="dlBtn" class="btn btn--light">Save QR</button>
+        <button type="button" id="copyBtn" class="btn btn--light">Copy ref</button>
+        <a id="waSelf" href="#" target="_blank" rel="noopener" class="btn btn--wa">Send to WhatsApp</a>
+      </div>
+
+      <p class="tiny center mt-4" style="color:rgba(255,255,255,.65);line-height:1.6">
+        Pass valid only for ${guestName}. Cancellations from
+        <a href="./my-bookings.html" style="color:#fff">My bookings</a>, per ${vendorName}'s policy:<br />"${safeText(vendor.cancellation || '')}"
+      </p>
+    `;
+
+    // WhatsApp links
+    const plainName = cleanText(decodeHTML(vendor.name));
+    document.getElementById('waHost').href = waLink(vendorWhatsApp(vendor),
+      'Hi ' + firstName(plainName) + '! This is ' + cleanText(booking.visitorName) + ' — I have a BookedJA booking with you (' + booking.id + ', ' + fmtDate(booking.date) + ' at ' + booking.time + ').');
+    const passText = 'My BookedJA pass ✓\n' + cleanText(decodeHTML(vendor.title))
+      + '\nRef: ' + booking.id
+      + '\n' + fmtDate(booking.date) + ' at ' + booking.time + ' · ' + booking.guests + ' people'
+      + '\nHost: ' + plainName + ' (' + cleanText(decodeHTML(vendor.town)) + ')';
+    document.getElementById('waSelf').href = 'https://wa.me/?text=' + encodeURIComponent(passText);
+
+    // QR — locally-hosted qrcodejs (no CDN dependency)
+    const qrPayload = ['BookedJA', booking.id, vendor.id, booking.date, booking.time, booking.guests].join('|');
+    const qrEl = document.getElementById('qr');
+    qrEl.innerHTML = '';
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrEl, {
+        text: qrPayload, width: 150, height: 150,
+        colorDark: '#1B2A21', colorLight: '#FFFFFF',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    } else {
+      qrEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;color:#49594F;text-align:center;padding:8px">Booking ref<br><strong>' + safeText(booking.id) + '</strong></div>';
+    }
+
+    document.getElementById('dlBtn').addEventListener('click', () => {
+      const canvas = qrEl.querySelector('canvas');
+      const img = qrEl.querySelector('img');
+      let dataUrl = null;
+      if (canvas) { try { dataUrl = canvas.toDataURL('image/png'); } catch (e) {} }
+      if (!dataUrl && img) dataUrl = img.src;
+      if (!dataUrl) { showToast('Your ref: ' + booking.id); return; }
+      const link = document.createElement('a');
+      link.download = 'BookedJA-' + booking.id + '.png';
+      link.href = dataUrl;
+      link.click();
+      showToast('QR saved to your phone ✓');
+    });
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(booking.id); showToast('Reference copied ✓'); }
+      catch { showToast('Your ref: ' + booking.id); }
+    });
+
+    // Live ride-status updater (transport only) — driven by the driver's taps
+    if (isT) {
+      const updateRide = () => {
+        const fresh = getBooking(booking.id);
+        const el = document.getElementById('rideStatus');
+        if (fresh && el) el.innerHTML = rideBlockInner(fresh, vendor);
+      };
+      setInterval(updateRide, 3000);
+      window.addEventListener('storage', (e) => { if (!e.key || e.key === STORAGE_KEY) updateRide(); });
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const ref = getQuery('ref');
+    const isNew = getQuery('new') === '1';
+    const fail = (title, sub) => {
+      document.getElementById('root').innerHTML = `
+        <div class="center" style="padding:3rem 0;color:#fff">
+          <p class="font-display bold" style="font-size:1.6rem">${title}</p>
+          ${sub ? '<p class="small mt-2" style="color:rgba(255,255,255,.7)">' + sub + '</p>' : ''}
+          <a href="./my-bookings.html" class="btn btn--light mt-4">See my bookings</a>
+        </div>`;
+    };
+    if (!ref) return fail('No pass selected');
+    const booking = getBooking(ref);
+    if (!booking) return fail('Pass not found', 'Reference ' + safeText(ref) + ' isn\'t saved on this phone.');
+    const vendor = getVendor(booking.vendorId);
+    if (!vendor) return fail('Host not found');
+    render(booking, vendor, isNew);
+  });
+</script>
+</body>
+</html>

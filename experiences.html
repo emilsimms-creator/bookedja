@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookedJA — Things to do on the South Coast</title>
+  <meta name="description" content="Verified local tours, food experiences and trusted rides across Jamaica's South Coast. Fixed prices, real hosts, protected payment." />
+  <meta name="theme-color" content="#0E5435" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="stylesheet" href="./assets/fonts.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script defer src="./assets/data/vendors.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__in">
+      <a href="./index.html" class="brand-lockup" aria-label="BookedJA home">
+        <img src="./assets/images/bookedja-mark-dark.png" alt="" aria-hidden="true" class="brand-lockup__mark" /><img src="./assets/images/bookedja-wordmark-dark.png" alt="BookedJA" class="brand-lockup__wordmark" />
+      </a>
+      <nav class="site-nav" id="siteNav" aria-label="Main">
+        <a href="./experiences.html" aria-current="page">Things to do</a>
+        <a href="./my-bookings.html">My bookings</a>
+        <a href="./vendors.html">For operators</a>
+        <a href="./about.html">About</a>
+      </nav>
+      <a href="./my-bookings.html" class="btn btn--ghost btn--small header-cta">My bookings</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="section--tight">
+    <div class="container">
+      <span class="kicker">South Coast, Jamaica</span>
+      <h1 class="mt-2">Things to do</h1>
+      <p class="lead mt-2" style="max-width:46rem">Every host here was checked by our team in person. The price you see is the full price — no extras, no haggling.</p>
+
+      <div class="filters mt-4" id="filters" role="group" aria-label="Filter by category">
+        <button type="button" class="filter-chip is-active" data-cat="all">Everything</button>
+        <button type="button" class="filter-chip" data-cat="Tour">Tours</button>
+        <button type="button" class="filter-chip" data-cat="Food">Food</button>
+        <button type="button" class="filter-chip" data-cat="Transport">Rides</button>
+      </div>
+
+      <p id="count" class="muted small mt-3" role="status"></p>
+      <div id="grid" class="grid grid--3 mt-3">
+        <noscript><p class="muted">Turn on JavaScript to browse experiences.</p></noscript>
+      </div>
+
+      <div class="card card--tint mt-6 center">
+        <h2 style="font-size:1.4rem">Can't decide? Ask us.</h2>
+        <p class="muted mt-2">Tell us what you like and we'll point you to the right host.</p>
+        <a id="askWa" href="#" class="btn btn--wa mt-3">Message BookedJA on WhatsApp</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__bar">
+        <span>© 2026 BookedJA · Made in St. Elizabeth, Jamaica</span>
+        <span>Prototype — no real payments are processed</span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('askWa').href = waLink(PLATFORM_WHATSAPP, 'Hi BookedJA! Can you help me pick something to do on the South Coast?');
+
+    // Only live listings are public — host drafts stay hidden until verified
+    const list = getAllVendors().filter(v => !v.custom || v.status === 'live');
+    let cat = getQuery('cat') || 'all';
+
+    function tierBadge(v) {
+      if (v.tier === 'Top Local') return '<span class="xcard__badge badge badge--top">★ Top Local</span>';
+      if (v.tier === 'New') return '<span class="xcard__badge badge badge--new">New host</span>';
+      return '<span class="xcard__badge badge badge--verified">✓ Verified</span>';
+    }
+
+    function cardHTML(v) {
+      const unit = v.category === 'Transport' ? 'per trip' : 'per person';
+      return `
+        <a class="xcard" href="./vendor-detail.html?id=${encodeURIComponent(v.id)}">
+          <div class="xcard__media">
+            <img src="${v.image}" alt="" loading="lazy" width="800" height="600" />
+            ${tierBadge(v)}
+          </div>
+          <div class="xcard__body">
+            <p class="xcard__meta">${safeText(v.town)} · ${v.durationHrs ? v.durationHrs + ' hrs' : 'flexible'}</p>
+            <p class="xcard__title">${safeText(v.title)}</p>
+            <p class="xcard__rating">${v.rating > 0 ? '★ ' + v.rating.toFixed(1) + ' · ' + v.trips + ' trips' : 'Just joined — be their first review'}</p>
+            <p class="xcard__price"><strong>${fmtUSD(v.pricePerPersonUSD)}</strong><span>${unit} · ≈ ${fmtJMD(v.pricePerPersonUSD * USD_TO_JMD)}</span></p>
+          </div>
+        </a>`;
+    }
+
+    function render() {
+      const rows = cat === 'all' ? list : list.filter(v => v.category === cat);
+      document.getElementById('grid').innerHTML = rows.map(cardHTML).join('') ||
+        '<p class="muted">Nothing in this category yet — check back soon.</p>';
+      const label = { all: 'experiences', Tour: 'tours', Food: 'food experiences', Transport: 'rides' }[cat] || 'experiences';
+      document.getElementById('count').textContent = rows.length + ' ' + label + ', all verified';
+      document.querySelectorAll('#filters .filter-chip').forEach(b =>
+        b.classList.toggle('is-active', b.dataset.cat === cat));
+    }
+
+    document.getElementById('filters').addEventListener('click', (e) => {
+      const b = e.target.closest('.filter-chip');
+      if (!b) return;
+      cat = b.dataset.cat;
+      const url = new URL(location.href);
+      if (cat === 'all') url.searchParams.delete('cat'); else url.searchParams.set('cat', cat);
+      history.replaceState(null, '', url);
+      render();
+    });
+
+    render();
+  });
+</script>
+</body>
+</html>
