@@ -134,7 +134,7 @@
       btn.addEventListener('click', () => {
         const id = btn.dataset.id;
         if (btn.dataset.go === 'start') { updateBooking(id, { status: 'in_progress' }); showToast('Guest checked in ✓'); }
-        else { updateBooking(id, { status: 'completed' }); showToast('Done! Money on the way 🎉'); }
+        else { updateBooking(id, { status: 'completed' }); showToast('Done! Booking complete 🎉'); }
         showResult(id);
       });
     });

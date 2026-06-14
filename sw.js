@@ -2,7 +2,7 @@
    Strategy: precache the full app shell, then stale-while-revalidate so
    pages open instantly from cache and quietly refresh when signal allows. */
 
-const CACHE = 'bookedja-v2.7.0';
+const CACHE = 'bookedja-v2.8.0';
 
 const PRECACHE = [
   './index.html',

@@ -181,7 +181,7 @@
         <div class="big-card mt-3">
           <p class="muted">Made this month with BookedJA</p>
           <p class="money-figure mt-1">${fmtJMD(earnedMonth)}</p>
-          <p class="small muted mt-1">Paid to your bank or wallet after each booking is done.</p>
+          <p class="small muted mt-1">Paid to your bank or wallet within a few business days of each booking being done.</p>
           <div class="mt-4">
             <div class="flex justify-between small bold"><span>From every booking, you keep ${Math.round((1 - PLATFORM_FEE) * 100)}%</span><span class="muted">BookedJA keeps ${PLATFORM_FEE_LABEL}</span></div>
             <div class="split-bar mt-2" role="img" aria-label="You keep ${Math.round((1 - PLATFORM_FEE) * 100)} percent of every booking">
@@ -249,7 +249,7 @@
         else if (action === 'complete') {
           const b = getBooking(id);
           updateBooking(id, { status: 'completed' });
-          showToast('Done! ' + fmtJMD(bookingPayoutJMD(b)) + ' on the way to you 🎉');
+          showToast('Done! ' + fmtJMD(bookingPayoutJMD(b)) + ' is yours 🎉');
         }
         else if (action === 'enroute') { updateBooking(id, { rideStatus: 'enroute', etaAt: Date.now() + 12 * 60000 }); showToast('Guest can see you\'re on the way'); }
         else if (action === 'arrived') { updateBooking(id, { rideStatus: 'arrived' }); showToast('Guest knows you\'ve arrived ✓'); }
