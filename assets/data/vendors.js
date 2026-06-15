@@ -4,7 +4,7 @@
 // Set on window so all pages share it without a module loader.
 window.VENDORS = [
   {
-    id: 'ras-delroy', category: 'Tour', name: 'Ras Delroy', title: 'Mangrove Safari with Ras Delroy',
+    id: 'ras-delroy', sample: true, category: 'Tour', name: 'Ras Delroy', title: 'Mangrove Safari with Ras Delroy',
     town: 'Black River', durationHrs: 2.5, pricePerPersonUSD: 45, rating: 5.0, trips: 124, tier: 'Top Local',
     image: './assets/images/black-river.jpg',
     short: 'Crocodile-spotting and mangrove ecology with a third-generation Black River boatman.',
@@ -28,7 +28,7 @@ window.VENDORS = [
     ]
   },
   {
-    id: 'miss-cynthia', category: 'Food', name: 'Miss Cynthia', title: 'Kitchen Supper with Miss Cynthia',
+    id: 'miss-cynthia', sample: true, category: 'Food', name: 'Miss Cynthia', title: 'Kitchen Supper with Miss Cynthia',
     town: 'Treasure Beach', durationHrs: 3, pricePerPersonUSD: 65, rating: 4.9, trips: 58, tier: 'Top Local',
     image: './assets/images/mangrove-river.jpg',
     short: 'Cook escovitch and rundown using produce from her sister’s farm next door.',
@@ -51,7 +51,7 @@ window.VENDORS = [
     ]
   },
   {
-    id: 'marcus-transfer', category: 'Transport', name: 'Marcus', title: 'Private Transfer with Marcus', vehicle: 'White Toyota Land Cruiser', plate: 'PP 4821',
+    id: 'marcus-transfer', sample: true, category: 'Transport', name: 'Marcus', title: 'Private Transfer with Marcus', vehicle: 'White Toyota Land Cruiser', plate: 'PP 4821',
     town: 'MBJ airport → Treasure Beach', durationHrs: 2.5, pricePerPersonUSD: 135, rating: 5.0, trips: 312, tier: 'Top Local',
     image: './assets/images/jamaica-road.jpg',
     short: 'JUTA-licensed driver, insured SUV, fixed fare. English-fluent local guide along the route.',

@@ -74,9 +74,11 @@
     const minDate = new Date(today.getTime() + 86400e3).toISOString().slice(0, 10); // from tomorrow
     const defDate = new Date(today.getTime() + 3 * 86400e3).toISOString().slice(0, 10);
 
-    const tierBadge = v.tier === 'Top Local'
-      ? '<span class="badge badge--top">★ Top Local</span>'
-      : (v.tier === 'New' ? '<span class="badge badge--new">New host</span>' : '<span class="badge badge--verified">✓ Verified</span>');
+    const tierBadge = v.sample
+      ? '<span class="badge" style="background:#e7ebe5;color:#49594f">◦ Sample listing</span>'
+      : (v.tier === 'Top Local'
+        ? '<span class="badge badge--top">★ Top Local</span>'
+        : (v.tier === 'New' ? '<span class="badge badge--new">New host</span>' : '<span class="badge badge--verified">✓ Verified</span>'));
 
     document.getElementById('root').innerHTML = `
       <div class="detail-hero"><img src="${v.image}" alt="" /></div>
@@ -97,6 +99,8 @@
           <div class="card card--tint">
             <h2 style="font-size:1.3rem">Your host: ${name}</h2>
             <p class="mt-2 muted">${safeText(v.about)}</p>
+            ${v.sample ? `<p class="mt-3 small" style="background:#fff8e1;border:1px solid #e9b824;border-radius:.5rem;padding:.6rem .8rem;color:#5b4a12">
+              <strong>Demonstration listing.</strong> This is not a real, checked operator. The verification badges below are shown to illustrate how a verified host appears — every live host is checked in person before going public.</p>` : ''}
             <ul class="trust-list mt-3">
               ${trustRow('ID checked in person', v.verification.identity)}
               ${trustRow('Tourism licence', v.verification.jtb)}

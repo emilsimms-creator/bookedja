@@ -45,6 +45,10 @@
         <button type="button" class="filter-chip is-active" data-cat="all">Everything</button>
         <button type="button" class="filter-chip" data-cat="Tour">Tours</button>
         <button type="button" class="filter-chip" data-cat="Food">Food</button>
+        <button type="button" class="filter-chip" data-cat="Farm">Farm &amp; garden</button>
+        <button type="button" class="filter-chip" data-cat="Craft">Craft &amp; makers</button>
+        <button type="button" class="filter-chip" data-cat="Wellness">Wellness</button>
+        <button type="button" class="filter-chip" data-cat="Heritage">Heritage</button>
         <button type="button" class="filter-chip" data-cat="Transport">Rides</button>
       </div>
 
@@ -79,6 +83,7 @@
     let cat = getQuery('cat') || 'all';
 
     function tierBadge(v) {
+      if (v.sample) return '<span class="xcard__badge badge" style="background:#e7ebe5;color:#49594f">◦ Sample listing</span>';
       if (v.tier === 'Top Local') return '<span class="xcard__badge badge badge--top">★ Top Local</span>';
       if (v.tier === 'New') return '<span class="xcard__badge badge badge--new">New host</span>';
       return '<span class="xcard__badge badge badge--verified">✓ Verified</span>';
@@ -101,18 +106,49 @@
         </a>`;
     }
 
+    // Categories we're actively building. Until a verified host joins one, it shows an
+    // honest "joining now" placeholder — no fabricated operators, no unearned badges.
+    const COMING_SOON = {
+      Farm:     ['Farm & garden', 'Herb walks, farm tours and beekeeping — starting at Glenda’s Shamba in Malvern.'],
+      Craft:    ['Craft & makers', 'Calabash carvers, basket weavers and potters across St. Elizabeth.'],
+      Wellness: ['Wellness', 'Bush baths, herbal steams and sunrise sessions, led by local hosts.'],
+      Heritage: ['Heritage', 'Maroon heritage walks and cultural sites in Jamaica’s deep south.'],
+    };
+    function comingSoonHTML(c) {
+      const [label, blurb] = COMING_SOON[c];
+      return `
+        <div class="xcard xcard--soon" aria-disabled="true" style="border:1px dashed var(--line);background:#fafbf9;cursor:default;display:flex;flex-direction:column">
+          <div class="xcard__body">
+            <p class="xcard__meta">Joining the South Coast pilot now</p>
+            <p class="xcard__title">${label} experiences</p>
+            <p class="muted small mt-2">${blurb} Our first verified hosts in this category are being recruited and checked in person now.</p>
+          </div>
+        </div>`;
+    }
+
     function render() {
       const rows = cat === 'all' ? list : list.filter(v => v.category === cat);
-      document.getElementById('grid').innerHTML = rows.map(cardHTML).join('') ||
+      const soonCats = cat === 'all'
+        ? Object.keys(COMING_SOON).filter(c => !list.some(v => v.category === c))
+        : (COMING_SOON[cat] && rows.length === 0 ? [cat] : []);
+      const tiles = rows.map(cardHTML).concat(soonCats.map(comingSoonHTML)).join('');
+      document.getElementById('grid').innerHTML = tiles ||
         '<p class="muted">Nothing in this category yet — check back soon.</p>';
       const labels = {
         all: ['experience', 'experiences'],
         Tour: ['tour', 'tours'],
         Food: ['food experience', 'food experiences'],
+        Farm: ['farm & garden experience', 'farm & garden experiences'],
+        Craft: ['craft experience', 'craft experiences'],
+        Wellness: ['wellness experience', 'wellness experiences'],
+        Heritage: ['heritage experience', 'heritage experiences'],
         Transport: ['ride', 'rides']
       }[cat] || ['experience', 'experiences'];
       const noun = rows.length === 1 ? labels[0] : labels[1];
-      document.getElementById('count').textContent = rows.length + ' ' + noun + ' · every host verified in person';
+      const tail = (soonCats.length && cat !== 'all')
+        ? ' · more verified hosts joining now'
+        : ' · every host is verified in person before going live';
+      document.getElementById('count').textContent = rows.length + ' ' + noun + tail;
       document.querySelectorAll('#filters .filter-chip').forEach(b =>
         b.classList.toggle('is-active', b.dataset.cat === cat));
     }
