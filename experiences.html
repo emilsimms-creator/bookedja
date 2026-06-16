@@ -39,7 +39,7 @@
     <div class="container">
       <span class="kicker">South Coast, Jamaica</span>
       <h1 class="mt-2">Things to do</h1>
-      <p class="lead mt-2" style="max-width:46rem">Every host here was checked by our team in person. The price you see is the full price — no extras, no haggling.</p>
+      <p class="lead mt-2" style="max-width:46rem">Every host is checked by our team in person before they go live. The price you see is the full price — no extras, no haggling.</p>
 
       <div class="filters mt-4" id="filters" role="group" aria-label="Filter by category">
         <button type="button" class="filter-chip is-active" data-cat="all">Everything</button>
@@ -109,7 +109,7 @@
     // Categories we're actively building. Until a verified host joins one, it shows an
     // honest "joining now" placeholder — no fabricated operators, no unearned badges.
     const COMING_SOON = {
-      Farm:     ['Farm & garden', 'Herb walks, farm tours and beekeeping — starting at Glenda’s Shamba in Malvern.'],
+      Farm:     ['Farm & garden', 'Herb walks, farm tours and beekeeping, planned to begin at Glenda’s Shamba in Malvern.'],
       Craft:    ['Craft & makers', 'Calabash carvers, basket weavers and potters across St. Elizabeth.'],
       Wellness: ['Wellness', 'Bush baths, herbal steams and sunrise sessions, led by local hosts.'],
       Heritage: ['Heritage', 'Maroon heritage walks and cultural sites in Jamaica’s deep south.'],
@@ -119,9 +119,9 @@
       return `
         <div class="xcard xcard--soon" aria-disabled="true" style="border:1px dashed var(--line);background:#fafbf9;cursor:default;display:flex;flex-direction:column">
           <div class="xcard__body">
-            <p class="xcard__meta">Joining the South Coast pilot now</p>
+            <p class="xcard__meta">Coming soon</p>
             <p class="xcard__title">${label} experiences</p>
-            <p class="muted small mt-2">${blurb} Our first verified hosts in this category are being recruited and checked in person now.</p>
+            <p class="muted small mt-2">${blurb} We’ll list verified hosts here once they’ve been checked in person.</p>
           </div>
         </div>`;
     }
@@ -146,7 +146,7 @@
       }[cat] || ['experience', 'experiences'];
       const noun = rows.length === 1 ? labels[0] : labels[1];
       const tail = (soonCats.length && cat !== 'all')
-        ? ' · more verified hosts joining now'
+        ? ' · coming soon'
         : ' · every host is verified in person before going live';
       document.getElementById('count').textContent = rows.length + ' ' + noun + tail;
       document.querySelectorAll('#filters .filter-chip').forEach(b =>
