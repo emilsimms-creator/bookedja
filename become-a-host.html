@@ -74,15 +74,24 @@
             <input id="email" class="input ba-field" type="email" placeholder="you@example.com" required />
           </label>
           <label class="field">
-            <span>Your town</span>
-            <input id="town" class="input ba-field" type="text" list="townList" placeholder="e.g. Treasure Beach" required />
-            <datalist id="townList">
-              <option value="Black River"></option><option value="Treasure Beach"></option>
-              <option value="Bluefields"></option><option value="Malvern"></option>
-              <option value="Appleton"></option><option value="YS Falls"></option>
-              <option value="Little Ochi"></option><option value="Lover's Leap"></option>
-              <option value="Whitehouse"></option><option value="Santa Cruz"></option>
-            </datalist>
+            <span>Your parish</span>
+            <select id="town" class="input ba-field" required>
+              <option value="" disabled selected>Select your parish</option>
+              <option>Kingston</option>
+              <option>St. Andrew</option>
+              <option>Portland</option>
+              <option>St. Thomas</option>
+              <option>St. Catherine</option>
+              <option>St. Mary</option>
+              <option>St. Ann</option>
+              <option>Manchester</option>
+              <option>Clarendon</option>
+              <option>Hanover</option>
+              <option>Westmoreland</option>
+              <option>St. James</option>
+              <option>Trelawny</option>
+              <option>St. Elizabeth</option>
+            </select>
           </label>
         </div>
         <button id="nextBtn" type="button" class="btn btn--primary btn--big btn--block mt-4">Next: what you offer →</button>
@@ -166,7 +175,7 @@
     var isListingOnly = getQuery('mode') === 'listing'; // existing host adding another listing
 
     document.getElementById('waJoin').href = waLink(PLATFORM_WHATSAPP,
-      'Hi BookedJA! I want to join.\nMy name: \nMy town: \nWhat I do (tours / food / driving / stay): ');
+      'Hi BookedJA! I want to join.\nMy name: \nMy parish: \nWhat I do (tours / food / driving / stay): ');
 
     var form = document.getElementById('hostForm');
     var step1 = document.getElementById('step1');
