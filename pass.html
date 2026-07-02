@@ -6,6 +6,7 @@
   <title>BookedJA — Your pass</title>
   <meta name="description" content="Your BookedJA pass with QR code. Works offline — just show it on arrival." />
   <meta name="theme-color" content="#0E5435" />
+  <meta name="robots" content="noindex" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
@@ -35,7 +36,7 @@
 <script>
   function statusPill(s) {
     const map = {
-      confirmed:   { label: '✓ Already Booked', cls: 'badge--ok' },
+      confirmed:   { label: '✓ Confirmed', cls: 'badge--ok' },
       in_progress: { label: 'Happening now', cls: 'badge--warn' },
       completed:   { label: 'Completed', cls: 'badge--neutral' },
       cancelled:   { label: 'Cancelled', cls: 'badge--bad' }
@@ -104,7 +105,7 @@
         <div style="padding:1.4rem 1.4rem 1rem" class="flex items-start justify-between gap-3">
           <div>
             <p class="tiny bold" style="text-transform:uppercase;letter-spacing:.12em;color:var(--soft)">Booking ref</p>
-            <p class="font-display bold" style="font-size:1.7rem;letter-spacing:.04em">${safeText(booking.id)}</p>
+            <p class="font-display bold" style="font-size:clamp(1.3rem,5.5vw,1.7rem);letter-spacing:.04em;white-space:nowrap">${safeText(booking.id)}</p>
           </div>
           ${statusPill(booking.status)}
         </div>
@@ -193,15 +194,28 @@
       qrEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;color:#49594F;text-align:center;padding:8px">Booking ref<br><strong>' + safeText(booking.id) + '</strong></div>';
     }
 
-    document.getElementById('dlBtn').addEventListener('click', () => {
+    document.getElementById('dlBtn').addEventListener('click', async () => {
       const canvas = qrEl.querySelector('canvas');
       const img = qrEl.querySelector('img');
+      const fileName = 'BookedJA-' + booking.id + '.png';
+      // iOS Safari ignores the download attribute — the native share sheet
+      // (with "Save Image") is the reliable path on the phones tourists carry.
+      if (canvas && navigator.share && navigator.canShare) {
+        try {
+          const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+          const file = new File([blob], fileName, { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: 'BookedJA pass ' + booking.id });
+            return;
+          }
+        } catch (e) { if (e && e.name === 'AbortError') return; /* fall through to download */ }
+      }
       let dataUrl = null;
       if (canvas) { try { dataUrl = canvas.toDataURL('image/png'); } catch (e) {} }
       if (!dataUrl && img) dataUrl = img.src;
       if (!dataUrl) { showToast('Your ref: ' + booking.id); return; }
       const link = document.createElement('a');
-      link.download = 'BookedJA-' + booking.id + '.png';
+      link.download = fileName;
       link.href = dataUrl;
       link.click();
       showToast('QR saved to your phone ✓');
@@ -211,14 +225,17 @@
       catch { showToast('Your ref: ' + booking.id); }
     });
 
-    // Live ride-status updater (transport only) — driven by the driver's taps
+    // Live ride-status updater (transport only) — driven by the driver's taps.
+    // Skips ticks while the tab is hidden so an open pass doesn't drain battery.
     if (isT) {
       const updateRide = () => {
+        if (document.hidden) return;
         const fresh = getBooking(booking.id);
         const el = document.getElementById('rideStatus');
         if (fresh && el) el.innerHTML = rideBlockInner(fresh, vendor);
       };
       setInterval(updateRide, 3000);
+      document.addEventListener('visibilitychange', updateRide);
       window.addEventListener('storage', (e) => { if (!e.key || e.key === STORAGE_KEY) updateRide(); });
     }
   }

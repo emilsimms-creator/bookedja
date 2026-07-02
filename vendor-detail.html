@@ -6,6 +6,16 @@
   <title>BookedJA — Experience</title>
   <meta name="description" content="Experience details, plain-words verification, itinerary, fixed pricing and booking for a BookedJA host." />
   <meta name="theme-color" content="#0E5435" />
+  <link rel="canonical" href="https://bookedja.com/vendor-detail.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BookedJA" />
+  <meta property="og:title" content="A verified South Coast experience — BookedJA" />
+  <meta property="og:description" content="Experience details, plain-words verification, itinerary, fixed pricing and booking for a BookedJA host." />
+  <meta property="og:url" content="https://bookedja.com/vendor-detail.html" />
+  <meta property="og:image" content="https://bookedja.com/assets/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
@@ -71,7 +81,11 @@
     document.title = 'BookedJA — ' + cleanText(decodeHTML(v.title));
 
     const today = new Date();
-    const minDate = new Date(today.getTime() + 86400e3).toISOString().slice(0, 10); // from tomorrow
+    // Transfers can be booked same-day (a tourist landing today needs a ride today);
+    // tours and food need a day's notice so the host can prepare.
+    const minDate = isTransport
+      ? today.toISOString().slice(0, 10)
+      : new Date(today.getTime() + 86400e3).toISOString().slice(0, 10);
     const defDate = new Date(today.getTime() + 3 * 86400e3).toISOString().slice(0, 10);
 
     const tierBadge = v.sample
@@ -116,13 +130,13 @@
             <div class="card">
               <h3>What's included</h3>
               <ul class="trust-list mt-3">
-                ${(v.included || []).map(i => `<li><span class="tick">✓</span> ${i}</li>`).join('') || '<li class="muted">Details coming soon.</li>'}
+                ${(v.included || []).map(i => `<li><span class="tick">✓</span> ${safeText(i)}</li>`).join('') || '<li class="muted">Details coming soon.</li>'}
               </ul>
             </div>
             <div class="card">
               <h3>What to bring</h3>
               <ul class="trust-list mt-3">
-                ${(v.bring || []).map(i => `<li><span class="tick" style="background:var(--gold);color:var(--ink)">•</span> ${i}</li>`).join('') || '<li class="muted">Just yourself.</li>'}
+                ${(v.bring || []).map(i => `<li><span class="tick" style="background:var(--gold);color:var(--ink)">•</span> ${safeText(i)}</li>`).join('') || '<li class="muted">Just yourself.</li>'}
               </ul>
             </div>
           </div>
@@ -176,14 +190,14 @@
                 <span id="guestsLabel">How many people?</span>
                 <div class="stepper" role="group" aria-labelledby="guestsLabel">
                   <button type="button" id="gMinus" aria-label="One less person">−</button>
-                  <output id="gOut">2</output>
+                  <output id="gOut" aria-live="polite">2</output>
                   <button type="button" id="gPlus" aria-label="One more person">+</button>
                 </div>
               </div>
 
               <div class="summary-total mt-3">
                 <span class="bold">Total</span>
-                <span class="amt" id="totalOut"></span>
+                <span class="amt" id="totalOut" aria-live="polite"></span>
               </div>
               <p class="small faded center" id="totalJmd"></p>
 
@@ -231,6 +245,23 @@
         + '&time=' + encodeURIComponent(time)
         + '&guests=' + guests;
     });
+
+    // Structured data so search results can show price + star rating
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: cleanText(decodeHTML(v.title)),
+      description: cleanText(decodeHTML(v.short || v.about || '')),
+      image: 'https://bookedja.com/' + String(v.image || '').replace(/^\.\//, ''),
+      brand: { '@type': 'Brand', name: 'BookedJA' },
+      offers: { '@type': 'Offer', price: v.pricePerPersonUSD, priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: 'https://bookedja.com/vendor-detail.html?id=' + encodeURIComponent(v.id) }
+    };
+    if (v.rating > 0 && v.reviews && v.reviews.length) {
+      ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: v.rating, reviewCount: v.reviews.length };
+    }
+    let ldEl = document.getElementById('vendorLd');
+    if (!ldEl) { ldEl = document.createElement('script'); ldEl.type = 'application/ld+json'; ldEl.id = 'vendorLd'; document.head.appendChild(ldEl); }
+    ldEl.textContent = JSON.stringify(ld);
   }
 
   window.addEventListener('DOMContentLoaded', () => {

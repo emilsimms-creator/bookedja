@@ -6,6 +6,16 @@
   <title>BookedJA — Join as an operator</title>
   <meta name="description" content="Join BookedJA in minutes — on WhatsApp with one message, or with a short form. Free to join, verified for free." />
   <meta name="theme-color" content="#0E5435" />
+  <link rel="canonical" href="https://bookedja.com/become-a-host.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BookedJA" />
+  <meta property="og:title" content="Join BookedJA as an operator — free" />
+  <meta property="og:description" content="Join BookedJA in minutes — on WhatsApp with one message, or with a short form. Free to join, verified for free." />
+  <meta property="og:url" content="https://bookedja.com/become-a-host.html" />
+  <meta property="og:image" content="https://bookedja.com/assets/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
@@ -271,11 +281,33 @@
       document.getElementById('sumListing').textContent = pending.title + ' · ' + pending.category;
       var unit = pending.category === 'Stay' ? '/ night' : (pending.category === 'Transport' ? '/ trip' : '/ person');
       document.getElementById('sumPrice').textContent = 'US$' + pending.pricePerPersonUSD + ' ' + unit;
-      document.getElementById('confirmModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+      openModal();
     });
 
-    function closeModal() { document.getElementById('confirmModal').classList.add('hidden'); document.body.style.overflow = ''; }
+    // Accessible modal: move focus in, trap Tab, close on Escape, restore focus
+    var modal = document.getElementById('confirmModal');
+    var lastFocus = null;
+    function modalKeys(e) {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key !== 'Tab') return;
+      var focusables = modal.querySelectorAll('button');
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    function openModal() {
+      lastFocus = document.activeElement;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('modalGo').focus();
+      document.addEventListener('keydown', modalKeys);
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', modalKeys);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalBackdrop').addEventListener('click', closeModal);
     document.getElementById('modalGo').addEventListener('click', function () {

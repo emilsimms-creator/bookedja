@@ -102,10 +102,10 @@ function getVendor(id) {
 
 // Default image / duration / time slots per category (for newly created host listings)
 const CATEGORY_DEFAULTS = {
-  Tour:      { image: './assets/images/green-hills.jpg',    durationHrs: 2,   times: ['09:00', '13:00'] },
-  Food:      { image: './assets/images/pelican-bar.jpg',    durationHrs: 2.5, times: ['12:00', '17:00'] },
-  Transport: { image: './assets/images/jamaica-road.jpg',   durationHrs: 1,   times: ['on request'] },
-  Stay:      { image: './assets/images/treasure-beach.jpg', durationHrs: 0,   times: ['from 3:00 PM'] }
+  Tour:      { image: './assets/images/green-hills.webp',    durationHrs: 2,   times: ['09:00', '13:00'] },
+  Food:      { image: './assets/images/pelican-bar.webp',    durationHrs: 2.5, times: ['12:00', '17:00'] },
+  Transport: { image: './assets/images/jamaica-road.webp',   durationHrs: 1,   times: ['on request'] },
+  Stay:      { image: './assets/images/treasure-beach.webp', durationHrs: 0,   times: ['from 3:00 PM'] }
 };
 
 // ---- Host ACCOUNT profile (stored separately from listings) ----
@@ -291,9 +291,16 @@ function initNavToggle() {
   const btn = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.site-nav');
   if (!btn || !nav) return;
-  btn.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  btn.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); btn.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('is-open') && !nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
   });
 }
 

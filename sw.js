@@ -2,8 +2,12 @@
    Strategy: precache the full app shell, then stale-while-revalidate so
    pages open instantly from cache and quietly refresh when signal allows. */
 
-const CACHE = 'bookedja-v2.8.0';
+const CACHE = 'bookedja-v2.9.0';
 
+// Precache the lightweight app shell only (~200 KB). Photos are cached at
+// runtime by the fetch handler as they're viewed — precaching megabytes of
+// imagery made the atomic install fail on exactly the weak connections this
+// app is built for.
 const PRECACHE = [
   './index.html',
   './about.html',
@@ -28,17 +32,7 @@ const PRECACHE = [
   './assets/images/bookedja-mark-dark.png',
   './assets/images/bookedja-mark-light.png',
   './assets/images/bookedja-wordmark-dark.png',
-  './assets/images/bookedja-wordmark-light.png',
-  './assets/images/hero-coast.jpg',
-  './assets/images/black-river.jpg',
-  './assets/images/appleton-cane.jpg',
-  './assets/images/treasure-beach.jpg',
-  './assets/images/ys-falls.jpg',
-  './assets/images/cliff-coast.jpg',
-  './assets/images/green-hills.jpg',
-  './assets/images/mangrove-river.jpg',
-  './assets/images/pelican-bar.jpg',
-  './assets/images/jamaica-road.jpg'
+  './assets/images/bookedja-wordmark-light.png'
 ];
 
 self.addEventListener('install', (event) => {

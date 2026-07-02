@@ -6,6 +6,7 @@
   <title>BookedJA — Confirm your booking</title>
   <meta name="description" content="Check your details, pay safely, and get your BookedJA pass. Your money is held until the experience is done." />
   <meta name="theme-color" content="#0E5435" />
+  <meta name="robots" content="noindex" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
@@ -42,7 +43,10 @@
 <script>
   function render(v, params) {
     const isTransport = v.category === 'Transport';
-    const guests = Math.max(1, parseInt(params.guests || '1', 10));
+    // Clamp to the same limits the detail page enforces; a hand-edited URL
+    // must not produce a 500-guest (or NaN) checkout.
+    const maxGuests = isTransport ? 7 : 10;
+    const guests = Math.min(maxGuests, Math.max(1, parseInt(params.guests, 10) || 1));
     const totalUSD = v.pricePerPersonUSD * (isTransport ? 1 : guests);
     const totalJMD = totalUSD * USD_TO_JMD;
     const name = safeText(v.name);
@@ -182,6 +186,7 @@
       guests: getQuery('guests')
     };
     const v = getVendor(params.vendor);
+    if (params.date && !/^\d{4}-\d{2}-\d{2}$/.test(params.date)) params.date = null;
     if (!v || !params.date) {
       document.getElementById('root').innerHTML = `
         <div class="center" style="padding:4rem 0">

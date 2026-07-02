@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /vendor-dashboard.html
+Disallow: /vendor-scan.html
+Disallow: /book.html
+Disallow: /pass.html
+Disallow: /my-bookings.html
+
+Sitemap: https://bookedja.com/sitemap.xml

@@ -6,13 +6,35 @@
   <title>BookedJA — Jamaica, booked direct. Verified.</title>
   <meta name="description" content="Jamaica's South Coast, booked direct: river safaris, home cooking and honest rides from local hosts we verify in person before they go live. Fixed prices, protected payment, and a pass that works offline — even with no signal." />
   <meta name="theme-color" content="#0E5435" />
+  <link rel="canonical" href="https://bookedja.com/index.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BookedJA" />
+  <meta property="og:title" content="BookedJA — Jamaica, booked direct. Verified." />
+  <meta property="og:description" content="Jamaica's South Coast, booked direct: river safaris, home cooking and honest rides from local hosts we verify in person. Fixed prices, protected payment, offline pass." />
+  <meta property="og:url" content="https://bookedja.com/index.html" />
+  <meta property="og:image" content="https://bookedja.com/assets/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="preload" as="image" href="./assets/images/hero-coast.webp" imagesrcset="./assets/images/hero-coast-800.webp 800w, ./assets/images/hero-coast.webp 1600w" imagesizes="100vw" fetchpriority="high" />
   <link rel="stylesheet" href="./assets/fonts.css" />
   <link rel="stylesheet" href="./assets/styles.css" />
   <script defer src="./assets/data/vendors.js"></script>
   <script defer src="./assets/app.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "BookedJA",
+    "url": "https://bookedja.com/",
+    "logo": "https://bookedja.com/assets/images/bookedja-icon.png",
+    "description": "Marketplace connecting visitors directly with verified local tour, food and transport operators on Jamaica's South Coast.",
+    "address": { "@type": "PostalAddress", "addressRegion": "St. Elizabeth", "addressCountry": "JM" }
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -39,7 +61,7 @@
 
     <!-- HERO -->
     <section class="hero">
-      <img class="hero__img" src="./assets/images/hero-coast.jpg" alt="" fetchpriority="high" />
+      <img class="hero__img" src="./assets/images/hero-coast.webp" srcset="./assets/images/hero-coast-800.webp 800w, ./assets/images/hero-coast.webp 1600w" sizes="100vw" alt="" fetchpriority="high" />
       <div class="container">
         <div class="hero__in">
           <span class="kicker">Jamaica's South Coast. Authentic Jamaican Experiences. Trusted Local Guides</span>
@@ -60,21 +82,21 @@
         <h2 class="mt-2">What would you like to do?</h2>
         <div class="grid grid--3 mt-4">
           <a class="xcard" href="./experiences.html?cat=Tour">
-            <div class="xcard__media"><img src="./assets/images/green-hills.jpg" alt="Green hills of the Jamaican countryside" loading="lazy" width="800" height="600" /></div>
+            <div class="xcard__media"><img src="./assets/images/green-hills.webp" alt="Green hills of the Jamaican countryside" loading="lazy" width="800" height="600" /></div>
             <div class="xcard__body">
               <p class="xcard__title">Tours &amp; adventures</p>
               <p class="xcard__meta">River safaris, heritage walks, waterfalls — with people who grew up there.</p>
             </div>
           </a>
           <a class="xcard" href="./experiences.html?cat=Food">
-            <div class="xcard__media"><img src="./assets/images/pelican-bar.jpg" alt="Seafood lunch at the Pelican Bar sandbar" loading="lazy" width="800" height="600" /></div>
+            <div class="xcard__media"><img src="./assets/images/pelican-bar.webp" alt="Seafood lunch at the Pelican Bar sandbar" loading="lazy" width="800" height="600" /></div>
             <div class="xcard__body">
               <p class="xcard__title">Food &amp; cooking</p>
               <p class="xcard__meta">Beach cookouts, kitchen suppers, steam-pot feasts — straight from the source.</p>
             </div>
           </a>
           <a class="xcard" href="./experiences.html?cat=Transport">
-            <div class="xcard__media"><img src="./assets/images/jamaica-road.jpg" alt="A country road on Jamaica's South Coast" loading="lazy" width="800" height="600" /></div>
+            <div class="xcard__media"><img src="./assets/images/jamaica-road.webp" alt="A country road on Jamaica's South Coast" loading="lazy" width="800" height="600" /></div>
             <div class="xcard__body">
               <p class="xcard__title">Rides &amp; transfers</p>
               <p class="xcard__meta">Licensed, insured drivers. Fixed fares — no haggling, no surprises.</p>
@@ -205,6 +227,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="./about.html">About us</a></li>
+          <li><a href="./why-bookedja.html">Why it works</a></li>
         </ul>
         <p class="small mt-2" style="color:rgba(255,255,255,.7)">Questions? Message us any day.</p>
         <a id="helpWa" href="#" class="btn btn--wa btn--small mt-2">WhatsApp us</a>

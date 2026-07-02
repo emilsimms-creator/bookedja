@@ -6,9 +6,20 @@
   <title>BookedJA — About us: tourism that pays the people who make it special</title>
   <meta name="description" content="BookedJA is a Jamaican-built marketplace connecting visitors directly with verified local operators on the South Coast — fixed prices, protected payments, bookings on WhatsApp." />
   <meta name="theme-color" content="#0E5435" />
+  <link rel="canonical" href="https://bookedja.com/about.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BookedJA" />
+  <meta property="og:title" content="About BookedJA — tourism that pays the people who make it special" />
+  <meta property="og:description" content="BookedJA is a Jamaican-built marketplace connecting visitors directly with verified local operators on the South Coast — fixed prices, protected payments, bookings on WhatsApp." />
+  <meta property="og:url" content="https://bookedja.com/about.html" />
+  <meta property="og:image" content="https://bookedja.com/assets/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
+  <link rel="preload" as="image" href="./assets/images/treasure-beach.webp" imagesrcset="./assets/images/treasure-beach-800.webp 800w, ./assets/images/treasure-beach.webp 1600w" imagesizes="100vw" fetchpriority="high" />
   <link rel="stylesheet" href="./assets/fonts.css" />
   <link rel="stylesheet" href="./assets/styles.css" />
   <script defer src="./assets/data/vendors.js"></script>
@@ -27,7 +38,6 @@
         <a href="./my-bookings.html">My bookings</a>
         <a href="./vendors.html">For operators</a>
         <a href="./about.html" aria-current="page">About</a>
-        <a href="./why-bookedja.html">Why it works</a>
       </nav>
       <a href="./experiences.html" class="btn btn--primary btn--small header-cta">Book something</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
@@ -40,7 +50,7 @@
 
     <!-- HERO -->
     <section class="hero">
-      <img class="hero__img" src="./assets/images/treasure-beach.jpg" alt="" fetchpriority="high" />
+      <img class="hero__img" src="./assets/images/treasure-beach.webp" srcset="./assets/images/treasure-beach-800.webp 800w, ./assets/images/treasure-beach.webp 1600w" sizes="100vw" alt="" fetchpriority="high" />
       <div class="container">
         <div class="hero__in">
           <span class="kicker">About BookedJA</span>
@@ -175,6 +185,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="./about.html">About us</a></li>
+          <li><a href="./why-bookedja.html">Why it works</a></li>
           <li><a href="./ministry.html">Ministry &amp; partners</a></li>
         </ul>
       </div>

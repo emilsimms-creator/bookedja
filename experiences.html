@@ -6,6 +6,16 @@
   <title>BookedJA — Things to do on the South Coast</title>
   <meta name="description" content="Verified local tours, food experiences and trusted rides across Jamaica's South Coast. Fixed prices, real hosts, protected payment." />
   <meta name="theme-color" content="#0E5435" />
+  <link rel="canonical" href="https://bookedja.com/experiences.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BookedJA" />
+  <meta property="og:title" content="Things to do on Jamaica's South Coast — BookedJA" />
+  <meta property="og:description" content="Verified local tours, food experiences and trusted rides across Jamaica's South Coast. Fixed prices, real hosts, protected payment." />
+  <meta property="og:url" content="https://bookedja.com/experiences.html" />
+  <meta property="og:image" content="https://bookedja.com/assets/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" href="./assets/images/bookedja-icon.png" />
   <link rel="apple-touch-icon" href="./assets/images/bookedja-icon.png" />
@@ -42,14 +52,14 @@
       <p class="lead mt-2" style="max-width:46rem">Every host is checked by our team in person before they go live. The price you see is the full price — no extras, no haggling.</p>
 
       <div class="filters mt-4" id="filters" role="group" aria-label="Filter by category">
-        <button type="button" class="filter-chip is-active" data-cat="all">Everything</button>
-        <button type="button" class="filter-chip" data-cat="Tour">Tours</button>
-        <button type="button" class="filter-chip" data-cat="Food">Food</button>
-        <button type="button" class="filter-chip" data-cat="Farm">Farm &amp; garden</button>
-        <button type="button" class="filter-chip" data-cat="Craft">Craft &amp; makers</button>
-        <button type="button" class="filter-chip" data-cat="Wellness">Wellness</button>
-        <button type="button" class="filter-chip" data-cat="Heritage">Heritage</button>
-        <button type="button" class="filter-chip" data-cat="Transport">Rides</button>
+        <button type="button" class="filter-chip is-active" data-cat="all" aria-pressed="true">Everything</button>
+        <button type="button" class="filter-chip" data-cat="Tour" aria-pressed="false">Tours</button>
+        <button type="button" class="filter-chip" data-cat="Food" aria-pressed="false">Food</button>
+        <button type="button" class="filter-chip" data-cat="Farm" aria-pressed="false">Farm &amp; garden</button>
+        <button type="button" class="filter-chip" data-cat="Craft" aria-pressed="false">Craft &amp; makers</button>
+        <button type="button" class="filter-chip" data-cat="Wellness" aria-pressed="false">Wellness</button>
+        <button type="button" class="filter-chip" data-cat="Heritage" aria-pressed="false">Heritage</button>
+        <button type="button" class="filter-chip" data-cat="Transport" aria-pressed="false">Rides</button>
       </div>
 
       <p id="count" class="muted small mt-3" role="status"></p>
@@ -149,8 +159,11 @@
         ? ' · coming soon'
         : ' · every host is verified in person before going live';
       document.getElementById('count').textContent = rows.length + ' ' + noun + tail;
-      document.querySelectorAll('#filters .filter-chip').forEach(b =>
-        b.classList.toggle('is-active', b.dataset.cat === cat));
+      document.querySelectorAll('#filters .filter-chip').forEach(b => {
+        const active = b.dataset.cat === cat;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
     }
 
     document.getElementById('filters').addEventListener('click', (e) => {

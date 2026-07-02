@@ -6,10 +6,10 @@ window.VENDORS = [
   {
     id: 'ras-delroy', sample: true, category: 'Tour', name: 'Ras Delroy', title: 'Mangrove Safari with Ras Delroy',
     town: 'Black River', durationHrs: 2.5, pricePerPersonUSD: 45, rating: 5.0, trips: 124, tier: 'Top Local',
-    image: './assets/images/black-river.jpg',
+    image: './assets/images/black-river.webp',
     short: 'Crocodile-spotting and mangrove ecology with a third-generation Black River boatman.',
     about: 'Ras Delroy has piloted boats on the Black River for thirty years. His father and grandfather both worked these waters. He knows every bird call and every croc by sight.',
-    included: ['2.5-hour river safari', 'Locally-roasted coffee on the return leg', 'Cold drinks &amp; light snacks', 'Life jackets &amp; rain ponchos'],
+    included: ['2.5-hour river safari', 'Locally-roasted coffee on the return leg', 'Cold drinks & light snacks', 'Life jackets & rain ponchos'],
     bring: ['Sun protection', 'Camera', 'Long sleeves if going at sunrise'],
     itinerary: [
       { time: '09:30', activity: 'Meet at the Black River boathouse' },
@@ -30,7 +30,7 @@ window.VENDORS = [
   {
     id: 'miss-cynthia', sample: true, category: 'Food', name: 'Miss Cynthia', title: 'Kitchen Supper with Miss Cynthia',
     town: 'Treasure Beach', durationHrs: 3, pricePerPersonUSD: 65, rating: 4.9, trips: 58, tier: 'Top Local',
-    image: './assets/images/mangrove-river.jpg',
+    image: './assets/images/pelican-bar.webp',
     short: 'Cook escovitch and rundown using produce from her sister’s farm next door.',
     about: 'Miss Cynthia’s kitchen is on a small farm three minutes from Calabash Bay. Her sister grows the okra. Her brother fishes the snapper.',
     included: ['Three-course Jamaican supper, cooked together', 'Wine + rum cocktails', 'Recipe cards to take home', 'Transport within Treasure Beach'],
@@ -53,7 +53,7 @@ window.VENDORS = [
   {
     id: 'marcus-transfer', sample: true, category: 'Transport', name: 'Marcus', title: 'Private Transfer with Marcus', vehicle: 'White Toyota Land Cruiser', plate: 'PP 4821',
     town: 'MBJ airport → Treasure Beach', durationHrs: 2.5, pricePerPersonUSD: 135, rating: 5.0, trips: 312, tier: 'Top Local',
-    image: './assets/images/jamaica-road.jpg',
+    image: './assets/images/jamaica-road.webp',
     short: 'JUTA-licensed driver, insured SUV, fixed fare. English-fluent local guide along the route.',
     about: 'Marcus has been driving the MBJ → Treasure Beach corridor for ten years. JUTA licensed since 2018.',
     included: ['Door-to-door private SUV', 'Fixed fare — no haggling', 'Cold water + cool towel on pickup', 'Optional Black River coffee stop'],

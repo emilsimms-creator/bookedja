@@ -8,6 +8,8 @@
   "background_color": "#FAF8F2",
   "theme_color": "#0E5435",
   "icons": [
-    { "src": "./assets/images/bookedja-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    { "src": "./assets/images/bookedja-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/images/bookedja-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/images/bookedja-icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
